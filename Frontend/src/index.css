@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+/* Below code is added for useTheme() support */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ========================= Light theme (default) ========================= */
+@theme {
+  --color-primary: #059669;
+  --color-accent:  #0EA5E9;
+
+  /* Primary Scale */
+  --color-primary-100: #ECFDF5;
+  --color-primary-200: #D1FAE5;
+  --color-primary-300: #A7F3D0;
+  --color-primary-400: #6EE7B7;
+  --color-primary-500: #059669;
+  --color-primary-600: #047857;
+  --color-primary-700: #065F46;
+  --color-primary-800: #064E3B;
+  --color-primary-900: #022C22;
+
+  /* Accent Scale */
+  --color-accent-100: #E0F2FE;
+  --color-accent-200: #BAE6FD;
+  --color-accent-300: #7DD3FC;
+  --color-accent-400: #38BDF8;
+  --color-accent-500: #0EA5E9;
+  --color-accent-600: #0284C7;
+  --color-accent-700: #0369A1;
+  --color-accent-800: #075985;
+  --color-accent-900: #0C4A6E;
+
+  /* Backgrounds */
+  --color-bg: #F8FAFC;
+  --color-elevated: #F1F5F9;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #E2E8F0;
+
+  /* Text */
+  --color-t-primary: #0F172A;
+  --color-t-secondary: #334155;
+  --color-t-muted: #64748B;
+  --color-t-disabled: #94A3B8;
+
+  /* Borders */
+  --color-border: #E2E8F0;
+
+  /* Feedback */
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
+
+  /* Chatbot Specific */
+  --color-user-bubble: #0EA5E9;
+  --color-user-text: #FFFFFF;
+
+  --color-bot-bubble: #F1F5F9;
+  --color-bot-text: #0F172A;
+
+  --color-chat-input-bg: #FFFFFF;
+  --color-chat-input-border: #E2E8F0;
+
+  --color-typing-dot: #94A3B8;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.08);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+}
+
+
+/* ========================= Dark theme ========================= */
+@layer theme {
+  .dark {
+
+  --color-primary: #34D399;
+  --color-accent:  #38BDF8;
+
+  /* Primary Scale */
+  --color-primary-100: #022C22;
+  --color-primary-200: #064E3B;
+  --color-primary-300: #065F46;
+  --color-primary-400: #047857;
+  --color-primary-500: #34D399;
+  --color-primary-600: #6EE7B7;
+  --color-primary-700: #A7F3D0;
+  --color-primary-800: #D1FAE5;
+  --color-primary-900: #ECFDF5;
+
+  /* Accent Scale */
+  --color-accent-100: #0C4A6E;
+  --color-accent-200: #075985;
+  --color-accent-300: #0369A1;
+  --color-accent-400: #0284C7;
+  --color-accent-500: #38BDF8;
+  --color-accent-600: #7DD3FC;
+  --color-accent-700: #BAE6FD;
+  --color-accent-800: #E0F2FE;
+  --color-accent-900: #F0F9FF;
+
+  /* Backgrounds */
+  --color-bg: #0F172A;
+  --color-elevated: #1E293B;
+  --color-surface: #111827;
+  --color-surface-elevated: #1F2937;
+
+  /* Text */
+  --color-t-primary: #F8FAFC;
+  --color-t-secondary: #CBD5F5;
+  --color-t-muted: #94A3B8;
+  --color-t-disabled: #64748B;
+
+  /* Borders */
+  --color-border: #334155;
+
+  /* Feedback */
+  --color-success: #4ADE80;
+  --color-warning: #FBBF24;
+  --color-error: #F87171;
+  --color-info: #60A5FA;
+
+  /* Chatbot Specific */
+  --color-user-bubble: #38BDF8;
+  --color-user-text: #0F172A;
+
+  --color-bot-bubble: #1F2937;
+  --color-bot-text: #F8FAFC;
+
+  --color-chat-input-bg: #111827;
+  --color-chat-input-border: #334155;
+
+  --color-typing-dot: #64748B;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.3);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.4);
+  }
+}
+
+/* Below mentioned styles are used to edit browser default theme. when autocomplete="on" on fields. */
+@layer base {
+  /* ================= Autofill — Base ================= */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  select:-webkit-autofill {
+    -webkit-text-fill-color: var(--color-t-primary);
+    caret-color: var(--color-t-primary);
+    /* Force background */
+    background-color: var(--color-surface) !important;
+    -webkit-box-shadow: 0 0 0 1000px var(--color-surface) inset !important;
+    /* Remove Chrome yellow flash */
+    transition: background-color 9999s ease-in-out 0s;
+    /* polishing */
+    border-color: var(--color-border);
+  }
+
+  /* ================= Autofill — Dark ================= */
+  .dark input:-webkit-autofill,
+  .dark textarea:-webkit-autofill,
+  .dark select:-webkit-autofill {
+    -webkit-text-fill-color: var(--color-t-primary);
+    caret-color: var(--color-t-primary);
+    background-color: var(--color-surface) !important;
+    -webkit-box-shadow: 0 0 0 1000px var(--color-surface) inset !important;
+    border-color: var(--color-border);
+  }
+}
+
+
+html, body {
+  font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem; /* Adjusted value as per navbar height for non-sm screens */
+}
+
+h1, h2, h3 {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Small screens (sm) */
+@media (max-width: 640px) {
+  html, body {
+    scroll-padding-top: 3.5rem; /* Adjusted value as per navbar height for sm screens */
+  }
+}

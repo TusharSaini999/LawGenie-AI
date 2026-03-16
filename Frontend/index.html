@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LawGenie</title>
+    <script>
+      (function () {
+        // TailwindCSS suggestion to avoid FOUC(Flash Of Unstyled Content)
+        const theme = localStorage.theme;
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+        // (theme === "system" && prefersDark) is important below.
+        // since we are storing "system" in localStorage.
+        if (theme === "dark" || (theme === "system" && prefersDark) || (!theme && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

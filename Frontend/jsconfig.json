@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "checkJs": true,   // enable type checking for JS files. Also various other benifits.
+  },
+  "include": ["src/**/*"]
+}
