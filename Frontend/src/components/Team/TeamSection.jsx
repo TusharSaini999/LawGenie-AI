@@ -6,27 +6,27 @@ import siddarthPhoto from "../../assets/siddarth.jpeg";
 const teamData = [
   {
     id: 1,
-    name: "Tushar Sahni",
-    role: "Founder",
-    image: tusharPhoto,
-    linkedin: "#",
-    github: "#"
-  },
-  {
-    id: 2,
     name: "Siddhant Kumar",
     role: "Co-Founder",
     image: siddarthPhoto,
-    linkedin: "#",
-    github: "#"
+    linkedin: "https://www.linkedin.com/in/siddharth-kumar-3855b231/",
+    github: "https://github.com/sidk-dev"
+  },
+  {
+    id: 2,
+    name: "Tushar Sahni",
+    role: "Founder",
+    image: tusharPhoto,
+    linkedin: "https://www.linkedin.com/in/tushar-saini-105865373/",
+    github: "https://github.com/TusharSaini999"
   },
   {
     id: 3,
     name: "Shobhit Singh",
     role: "Co-Founder",
     image: shobhitPhoto,
-    linkedin: "#",
-    github: "#"
+    linkedin: "https://www.linkedin.com/in/shobhit115/",
+    github: "https://github.com/shobhit115"
   }
 ];
 
@@ -34,7 +34,7 @@ const TeamSection = () => {
   return (
     <section className="py-24 bg-bg" id="team">
       <div className="max-w-7xl mx-auto px-6">
-        
+
         {/* Section Header */}
         <div className="text-center mb-20">
           <h2 className="text-sm font-bold text-(--color-primary) uppercase tracking-[0.3em] mb-4">
