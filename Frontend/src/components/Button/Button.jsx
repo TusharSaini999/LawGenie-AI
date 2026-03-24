@@ -22,13 +22,13 @@ export default function Button({
       {/* animated background */}
       <span
         className={`absolute inset-0 origin-left scale-x-0 group-hover:scale-x-100
-        transform transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]
+        transform transition-transform duration-300 ease-in-out
         group-disabled:scale-x-0
         ${buttonColor}`}
       />
 
       {/* subtle gloss layer */}
-      <span className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <span className="pointer-events-none absolute inset-0 bg-linear-to-b from-white/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       {/* content */}
       <span

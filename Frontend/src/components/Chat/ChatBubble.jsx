@@ -1,3 +1,6 @@
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 const formatTime = (time) => {
   if (!time) return "";
 
@@ -9,44 +12,43 @@ const formatTime = (time) => {
   }).format(date);
 };
 
-function ChatBubble({ role, text, createdAt, files = [] }) {
+function ChatBubble({ role, text, createdAt }) {
   const isUser = role === "user";
+  const bubbleWidthClass = isUser
+    ? "max-w-[92%] sm:max-w-[80%]"
+    : "max-w-full";
 
   return (
     <article
       className={`w-full flex ${isUser ? "justify-end" : "justify-start"}`}
     >
       <div
-        className={`max-w-[85%] sm:max-w-[75%] ${isUser ? "items-end" : "items-start"} flex flex-col gap-1.5`}
+        className={`${bubbleWidthClass} ${isUser ? "items-end" : "items-start"} flex flex-col gap-2`}
       >
         <div className="flex items-center gap-2 px-1">
-          <span className="text-[11px] font-medium uppercase tracking-wide text-t-muted">
+          <span className="text-[11px] font-semibold uppercase tracking-wide text-t-muted">
             {isUser ? "You" : "LawGenie"}
           </span>
+
           <span className="text-[11px] text-t-disabled">
             {formatTime(createdAt)}
           </span>
         </div>
 
         <div
-          className={`rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap wrap-anywhere border ${
+          className={`rounded-2xl px-4 py-3 text-[15px] leading-relaxed whitespace-pre-wrap wrap-anywhere border ${
             isUser
-              ? "bg-user-bubble text-user-text border-transparent"
-              : "bg-bot-bubble text-bot-text border-border"
+              ? "bg-surface-elevated text-t-primary border-border"
+              : "bg-transparent text-bot-text border-transparent"
           }`}
         >
-          {text}
-
-          {files.length > 0 && (
-            <div className="mt-3 flex flex-wrap gap-2">
-              {files.map((file, index) => (
-                <span
-                  key={`${file.name}-${file.size}-${index}`}
-                  className="inline-flex max-w-full items-center rounded-md px-2 py-1 text-xs border border-accent-700 text-accent-700 break-all"
-                >
-                  {file.name}
-                </span>
-              ))}
+          {isUser ? (
+            text
+          ) : (
+            <div className="chat-markdown">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {text || ""}
+              </ReactMarkdown>
             </div>
           )}
         </div>

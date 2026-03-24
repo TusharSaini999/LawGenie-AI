@@ -1,0 +1,33 @@
+# ================== API Server ==================
+fastapi==0.111.1
+uvicorn[standard]==0.23.2
+
+# ================== Config & Validation ==================
+pydantic==2.6.4
+pydantic-settings==2.2.1
+python-dotenv==1.0.1
+
+# ================== Database ==================
+pymongo==4.10.1
+
+# ================== Auth ==================
+PyJWT==2.9.0
+
+# ================== LLM Client ==================
+groq==0.11.0
+requests==2.31.0
+
+# ================== PDF Processing ==================
+PyPDF2==3.0.1
+
+# ================== LangChain ==================
+langchain-core==0.1.52
+langchain-text-splitters==0.0.1
+
+# ================== ML / Embeddings ==================
+numpy==1.26.4
+scikit-learn==1.4.1.post1
+
+sentence-transformers==2.7.0
+torch==2.2.2
+transformers==4.38.2

@@ -85,29 +85,36 @@ From the `Frontend/` directory:
 
 ## API Expectations
 
-The frontend posts chat requests to:
+The frontend sends chat requests to:
 
-- `POST /chat/`
+- `GET /chat/?q=<user message>`
 
-Request payload shape:
+Optional request auth header:
+
+```http
+Authorization: Bearer <token>
+```
+
+Response shape:
 
 ```json
 {
-  "message": "string",
-  "attachments": [
-    {
-      "name": "file.pdf",
-      "size": 123456,
-      "type": "application/pdf"
-    }
-  ]
+  "query": "<user message>",
+  "response": {
+    "query": "<user message>",
+    "answer": "<assistant reply>",
+    "context_count": 3
+  },
+  "token": "<jwt token>",
+  "token_status": "new|existing|regenerated",
+  "history": []
 }
 ```
 
-The UI accepts any of these response fields as assistant text:
+The UI extracts assistant text from these fields:
 
 - `answer`
-- `response`
+- `response.answer`
 - `message`
 - `data.answer`
 - `data.message`
@@ -115,5 +122,5 @@ The UI accepts any of these response fields as assistant text:
 ## Notes
 
 - Path alias `@` points to `Frontend/src`.
-- Chat input limits: up to 2 files, 5 MB per file, message length up to 2000 characters.
+- Chat input message length limit is up to 2000 characters.
 - If the API is unreachable or returns an unexpected payload, a fallback error message is shown in chat.

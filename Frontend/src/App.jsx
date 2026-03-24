@@ -20,14 +20,17 @@ import {
 import * as THREE from "three";
 import NET from "vanta/dist/vanta.net.min";
 
-export function VantaBackground({ children }) {
+export function VantaBackground({ children = null }) {
   const ref = useRef(null);
   const [vantaEffect, setVantaEffect] = useState(null);
 
   useEffect(() => {
     if (!vantaEffect) {
+      const initNet = typeof NET === "function" ? NET : NET?.default;
+      if (typeof initNet !== "function") return;
+
       setVantaEffect(
-        NET({
+        initNet({
           el: ref.current,
           THREE: THREE,
           mouseControls: true,
@@ -58,7 +61,13 @@ export function VantaBackground({ children }) {
   );
 }
 
-function HomeButtonComp({ children, href, onClick, variant = "primary" }) {
+function HomeButtonComp({
+  children,
+  href = undefined,
+  onClick = undefined,
+  variant = "primary",
+  className = "",
+}) {
   const baseStyle =
     "flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold shadow-md transition-transform hover:-translate-y-1 hover:shadow-lg";
   const primaryStyle = "bg-primary text-white hover:scale-105";
@@ -66,8 +75,8 @@ function HomeButtonComp({ children, href, onClick, variant = "primary" }) {
     "border border-gray-300 dark:border-white/20 hover:bg-gray-100 dark:hover:bg-white/10 text-t-primary";
   const style =
     variant === "primary"
-      ? `${baseStyle} ${primaryStyle}`
-      : `${baseStyle} ${secondaryStyle}`;
+      ? `${baseStyle} ${primaryStyle} ${className}`
+      : `${baseStyle} ${secondaryStyle} ${className}`;
 
   return href ? (
     <a href={href} className={style}>
@@ -94,7 +103,7 @@ function BackgroundDecor() {
 function HeroSection() {
   return (
     <section
-      className="relative flex items-center justify-center px-6 md:px-12 overflow-hidden min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
+      className="relative flex items-center justify-center px-6 md:px-12 overflow-hidden min-h-screen bg-linear-to-br from-gray-50 via-gray-100 to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
       id="home"
     >
       <VantaBackground />
@@ -104,7 +113,7 @@ function HeroSection() {
         </span>
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight text-gray-900 dark:text-white">
           Smarter Legal Research{" "}
-          <span className="block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <span className="block bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
             Powered by AI
           </span>
         </h1>
@@ -176,7 +185,7 @@ function FeaturesSection() {
               </div>
               <h3 className="text-lg font-semibold text-t-primary">{title}</h3>
               <p className="mt-2 text-sm text-t-secondary">{desc}</p>
-              <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br from-primary-400/5 to-accent-400/5" />
+              <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity bg-linear-to-br from-primary-400/5 to-accent-400/5" />
             </div>
           ))}
         </div>
@@ -196,15 +205,15 @@ function CTASection() {
       <VantaBackground />
       <BackgroundDecor />
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary-500 to-accent-500 p-10 md:p-16">
+        <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-linear-to-br from-primary-500 to-accent-500 p-10 md:p-16">
           <div className="absolute inset-0 bg-white/10 backdrop-blur-lg pointer-events-none rounded-3xl" />
           <div className="relative z-10 text-center max-w-3xl mx-auto space-y-6">
             <h2 className="text-3xl md:text-5xl font-extrabold leading-tight text-white">
               Start Using LawGenie Today
             </h2>
             <p className="text-white/80 text-lg md:text-xl">
-              Access Indian legal knowledge instantly. Upload documents, search
-              laws, and get AI-powered answers in real time.
+              Access Indian legal knowledge instantly. Search laws and get
+              AI-powered answers in real time.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-5">
               <HomeButtonComp
@@ -374,7 +383,7 @@ function UseCasesSection() {
               </div>
               <h3 className="text-lg font-semibold text-t-primary">{title}</h3>
               <p className="mt-2 text-sm text-t-secondary">{desc}</p>
-              <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br from-primary-400/5 to-accent-400/5" />
+              <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity bg-linear-to-br from-primary-400/5 to-accent-400/5" />
             </div>
           ))}
         </div>

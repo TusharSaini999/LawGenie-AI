@@ -1,26 +1,28 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import InputChatBox from "@/components/Chat/InputChatBox";
 import ChatScrollWindow from "../components/Chat/ChatScrollWindow";
 import chatService from "@/services/chatService";
 
-const createMessage = ({ role, text, files = [] }) => ({
+const createMessage = (payload) => ({
   id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-  role,
-  text,
-  files,
-  createdAt: new Date(),
+  role: payload?.role,
+  text: payload?.text,
+  createdAt: payload?.createdAt || new Date(),
 });
 
 const initialMessages = [
   createMessage({
     role: "assistant",
-    text: "Hello! I am LawGenie. Ask me about Indian laws, legal procedures, or upload documents to continue.",
+    text: "Hello! I am LawGenie. Ask me about Indian laws, legal procedures, rights, contracts, or legal research.",
   }),
 ];
 
 function ChatPage() {
   const [messages, setMessages] = useState(initialMessages);
   const [isTyping, setIsTyping] = useState(false);
+  const [isHistoryLoading, setIsHistoryLoading] = useState(true);
+  const [chatError, setChatError] = useState("");
+  const [chatResetKey, setChatResetKey] = useState(0);
   const pageRef = useRef(null);
   const pageBottomRef = useRef(null);
 
@@ -42,53 +44,128 @@ function ChatPage() {
   };
 
   useLayoutEffect(() => {
+    if (isHistoryLoading) return;
+
     const id = requestAnimationFrame(() => {
       scrollToBottom("auto");
     });
 
     return () => cancelAnimationFrame(id);
-  }, [messages, isTyping]);
+  }, [messages, isTyping, isHistoryLoading]);
 
-  const handleSend = async ({ message, files }) => {
-    if (isTyping) return;
+  useEffect(() => {
+    let isMounted = true;
 
-    const userMessage = createMessage({ role: "user", text: message, files });
+    const loadHistory = async () => {
+      setIsHistoryLoading(true);
+      setChatError("");
+
+      try {
+        const { hasHistory, history } = await chatService.getHistory();
+
+        if (!isMounted) return;
+
+        if (hasHistory) {
+          setMessages(
+            history.map((item) =>
+              createMessage({
+                role: item.role,
+                text: item.text,
+                createdAt: item.createdAt,
+              }),
+            ),
+          );
+        } else {
+          setMessages(initialMessages);
+        }
+      } catch (error) {
+        if (!isMounted) return;
+
+        setMessages(initialMessages);
+        setChatError(error?.message || "Unable to load chat history.");
+      } finally {
+        if (isMounted) {
+          setIsHistoryLoading(false);
+        }
+      }
+    };
+
+    loadHistory();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleSend = async ({ message }) => {
+    if (isTyping || isHistoryLoading) return;
+
+    setChatError("");
+
+    const userMessage = createMessage({ role: "user", text: message });
 
     setMessages((prev) => [...prev, userMessage]);
     setIsTyping(true);
     scrollToBottom();
 
     try {
-      const reply = await chatService.sendMessage({ message, files });
+      const { reply } = await chatService.sendMessage({ message });
 
       setMessages((prev) => [
         ...prev,
         createMessage({ role: "assistant", text: reply }),
       ]);
       scrollToBottom();
+    } catch (error) {
+      const messageText = error?.message || "Unable to fetch response.";
+      setChatError(messageText);
+      throw error;
     } finally {
       setIsTyping(false);
       scrollToBottom();
     }
   };
 
+  const handleNewChat = () => {
+    if (isTyping || isHistoryLoading) return;
+
+    chatService.startNewChat();
+    setChatError("");
+    setMessages(initialMessages);
+    setChatResetKey((prev) => prev + 1);
+    scrollToBottom("auto");
+  };
+
   return (
     <div
       ref={pageRef}
-      className="relative h-full min-h-0 bg-bg text-t-primary px-4 py-4 sm:px-6 sm:py-6"
+      className="relative h-full min-h-0 text-t-primary bg-bg"
     >
-      <section className="mx-auto min-h-full max-w-5xl rounded-2xl border border-border shadow-sm flex backdrop-blur-lg flex-col bg-surface">
-        <header className="px-5 py-4 border-b border-border bg-surface overflow-hidden rounded-t-2xl">
-          <p className="text-sm font-medium text-t-primary">LawGenie Chat</p>
-          <p className="text-xs mt-1 text-t-muted">
-            Professional legal assistant for Indian law research and document
-            understanding.
-          </p>
-        </header>
+      <div
+        className="pointer-events-none absolute inset-0 opacity-35"
+        aria-hidden="true"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, color-mix(in oklab, var(--color-border) 45%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklab, var(--color-border) 45%, transparent) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
+      />
 
-        <ChatScrollWindow messages={messages} isTyping={isTyping} />
+      <section className="relative z-10 mx-auto min-h-full w-full max-w-7xl flex flex-col">
+        <ChatScrollWindow
+          messages={messages}
+          isTyping={isTyping}
+          isHistoryLoading={isHistoryLoading}
+        />
 
-        <InputChatBox onSend={handleSend} loading={isTyping} />
+        <InputChatBox
+          onSend={handleSend}
+          loading={isTyping}
+          disabled={isHistoryLoading}
+          onNewChat={handleNewChat}
+          errorMessage={chatError}
+          resetKey={chatResetKey}
+        />
       </section>
 
       <div ref={pageBottomRef} className="h-px" aria-hidden="true" />

@@ -1,0 +1,406 @@
+2026-03-24 20:57:41,692 | INFO | ===== VECTOR TRAINING STARTED =====
+2026-03-24 20:57:41,692 | INFO | Loaded source mapping from CSV for 60 entries
+2026-03-24 20:57:42,332 | INFO | 193003.pdf total_chunks=63 already_done=0 pending=63
+2026-03-24 20:57:44,241 | INFO | 193003.pdf batch_saved=63 progress=63/63
+2026-03-24 20:57:44,305 | INFO | 193003.pdf done status=completed written=63
+2026-03-24 20:57:44,981 | INFO | 198065.pdf total_chunks=30 already_done=0 pending=30
+2026-03-24 20:57:45,873 | INFO | 198065.pdf batch_saved=30 progress=30/30
+2026-03-24 20:57:45,939 | INFO | 198065.pdf done status=completed written=30
+2026-03-24 20:57:46,405 | INFO | 201320.pdf total_chunks=63 already_done=0 pending=63
+2026-03-24 20:57:47,772 | INFO | 201320.pdf batch_saved=63 progress=63/63
+2026-03-24 20:57:47,841 | INFO | 201320.pdf done status=completed written=63
+2026-03-24 20:57:50,329 | INFO | 250882_english_01042024_0.pdf total_chunks=217 already_done=0 pending=217
+2026-03-24 20:57:51,824 | INFO | 250882_english_01042024_0.pdf batch_saved=64 progress=64/217
+2026-03-24 20:57:53,388 | INFO | 250882_english_01042024_0.pdf batch_saved=64 progress=128/217
+2026-03-24 20:57:55,009 | INFO | 250882_english_01042024_0.pdf batch_saved=64 progress=192/217
+2026-03-24 20:57:55,740 | INFO | 250882_english_01042024_0.pdf batch_saved=25 progress=217/217
+2026-03-24 20:57:55,824 | INFO | 250882_english_01042024_0.pdf done status=completed written=217
+2026-03-24 20:58:02,874 | INFO | 250883_english_01042024.pdf total_chunks=518 already_done=0 pending=518
+2026-03-24 20:58:04,434 | INFO | 250883_english_01042024.pdf batch_saved=64 progress=64/518
+2026-03-24 20:58:06,012 | INFO | 250883_english_01042024.pdf batch_saved=64 progress=128/518
+2026-03-24 20:58:07,608 | INFO | 250883_english_01042024.pdf batch_saved=64 progress=192/518
+2026-03-24 20:58:09,231 | INFO | 250883_english_01042024.pdf batch_saved=64 progress=256/518
+2026-03-24 20:58:10,955 | INFO | 250883_english_01042024.pdf batch_saved=64 progress=320/518
+2026-03-24 20:58:12,734 | INFO | 250883_english_01042024.pdf batch_saved=64 progress=384/518
+2026-03-24 20:58:14,448 | INFO | 250883_english_01042024.pdf batch_saved=64 progress=448/518
+2026-03-24 20:58:16,129 | INFO | 250883_english_01042024.pdf batch_saved=64 progress=512/518
+2026-03-24 20:58:16,431 | INFO | 250883_english_01042024.pdf batch_saved=6 progress=518/518
+2026-03-24 20:58:16,505 | INFO | 250883_english_01042024.pdf done status=completed written=518
+2026-03-24 20:58:19,095 | INFO | 250884_2_english_01042024.pdf total_chunks=1092 already_done=0 pending=1092
+2026-03-24 20:58:20,876 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=64/1092
+2026-03-24 20:58:22,600 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=128/1092
+2026-03-24 20:58:24,322 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=192/1092
+2026-03-24 20:58:26,031 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=256/1092
+2026-03-24 20:58:27,783 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=320/1092
+2026-03-24 20:58:29,499 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=384/1092
+2026-03-24 20:58:31,235 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=448/1092
+2026-03-24 20:58:33,066 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=512/1092
+2026-03-24 20:58:34,696 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=576/1092
+2026-03-24 20:58:36,361 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=640/1092
+2026-03-24 20:58:38,004 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=704/1092
+2026-03-24 20:58:39,640 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=768/1092
+2026-03-24 20:58:41,273 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=832/1092
+2026-03-24 20:58:42,964 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=896/1092
+2026-03-24 20:58:45,465 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=960/1092
+2026-03-24 20:58:47,165 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=1024/1092
+2026-03-24 20:58:48,824 | INFO | 250884_2_english_01042024.pdf batch_saved=64 progress=1088/1092
+2026-03-24 20:58:49,064 | INFO | 250884_2_english_01042024.pdf batch_saved=4 progress=1092/1092
+2026-03-24 20:58:49,132 | INFO | 250884_2_english_01042024.pdf done status=completed written=1092
+2026-03-24 20:58:49,498 | INFO | 5.pdf total_chunks=12 already_done=0 pending=12
+2026-03-24 20:58:50,003 | INFO | 5.pdf batch_saved=12 progress=12/12
+2026-03-24 20:58:50,070 | INFO | 5.pdf done status=completed written=12
+2026-03-24 20:58:53,222 | INFO | A187209.pdf total_chunks=225 already_done=0 pending=225
+2026-03-24 20:58:54,998 | INFO | A187209.pdf batch_saved=64 progress=64/225
+2026-03-24 20:58:56,613 | INFO | A187209.pdf batch_saved=64 progress=128/225
+2026-03-24 21:47:24,426 | INFO | ===== VECTOR TRAINING STARTED =====
+2026-03-24 21:47:24,426 | INFO | Loaded source mapping from CSV for 60 entries
+2026-03-24 21:47:25,440 | INFO | 193003.pdf total_chunks=63 already_done=63 pending=0
+2026-03-24 21:47:25,611 | INFO | 193003.pdf done status=completed written=0
+2026-03-24 21:47:26,616 | INFO | 198065.pdf total_chunks=30 already_done=30 pending=0
+2026-03-24 21:47:26,757 | INFO | 198065.pdf done status=completed written=0
+2026-03-24 21:47:27,845 | INFO | 201320.pdf total_chunks=63 already_done=63 pending=0
+2026-03-24 21:47:28,001 | INFO | 201320.pdf done status=completed written=0
+2026-03-24 21:47:33,066 | INFO | 250882_english_01042024_0.pdf total_chunks=217 already_done=217 pending=0
+2026-03-24 21:47:33,202 | INFO | 250882_english_01042024_0.pdf done status=completed written=0
+2026-03-24 21:47:38,731 | INFO | 250883_english_01042024.pdf total_chunks=518 already_done=518 pending=0
+2026-03-24 21:47:38,882 | INFO | 250883_english_01042024.pdf done status=completed written=0
+2026-03-24 21:47:40,360 | INFO | 250884_2_english_01042024.pdf total_chunks=1092 already_done=1092 pending=0
+2026-03-24 21:47:40,500 | INFO | 250884_2_english_01042024.pdf done status=completed written=0
+2026-03-24 21:47:40,776 | INFO | 5.pdf total_chunks=12 already_done=12 pending=0
+2026-03-24 21:47:40,910 | INFO | 5.pdf done status=completed written=0
+2026-03-24 21:47:43,525 | INFO | A187209.pdf total_chunks=225 already_done=128 pending=97
+2026-03-24 21:47:45,697 | INFO | A187209.pdf batch_saved=64 progress=192/225
+2026-03-24 21:47:46,906 | INFO | A187209.pdf batch_saved=33 progress=225/225
+2026-03-24 21:47:46,981 | INFO | A187209.pdf done status=completed written=97
+2026-03-24 21:47:49,005 | INFO | A1882-04.pdf total_chunks=206 already_done=0 pending=206
+2026-03-24 21:47:50,990 | INFO | A1882-04.pdf batch_saved=64 progress=64/206
+2026-03-24 21:47:52,594 | INFO | A1882-04.pdf batch_saved=64 progress=128/206
+2026-03-24 21:47:54,320 | INFO | A1882-04.pdf batch_saved=64 progress=192/206
+2026-03-24 21:47:54,803 | INFO | A1882-04.pdf batch_saved=14 progress=206/206
+2026-03-24 21:47:54,875 | INFO | A1882-04.pdf done status=completed written=206
+2026-03-24 21:47:55,389 | INFO | A1923-19.pdf total_chunks=37 already_done=0 pending=37
+2026-03-24 21:47:56,535 | INFO | A1923-19.pdf batch_saved=37 progress=37/37
+2026-03-24 21:47:56,600 | INFO | A1923-19.pdf done status=completed written=37
+2026-03-24 21:47:57,645 | INFO | a1948-011.pdf total_chunks=78 already_done=0 pending=78
+2026-03-24 21:47:59,412 | INFO | a1948-011.pdf batch_saved=64 progress=64/78
+2026-03-24 21:47:59,897 | INFO | a1948-011.pdf batch_saved=14 progress=78/78
+2026-03-24 21:47:59,980 | INFO | a1948-011.pdf done status=completed written=78
+2026-03-24 21:48:00,298 | INFO | A1951-61.pdf total_chunks=10 already_done=0 pending=10
+2026-03-24 21:48:00,760 | INFO | A1951-61.pdf batch_saved=10 progress=10/10
+2026-03-24 21:48:00,824 | INFO | A1951-61.pdf done status=completed written=10
+2026-03-24 21:48:01,845 | INFO | A1955-25.pdf total_chunks=58 already_done=0 pending=58
+2026-03-24 21:48:03,416 | INFO | A1955-25.pdf batch_saved=58 progress=58/58
+2026-03-24 21:48:03,478 | INFO | A1955-25.pdf done status=completed written=58
+2026-03-24 21:48:04,304 | INFO | a1955-57.pdf total_chunks=63 already_done=0 pending=63
+2026-03-24 21:48:06,061 | INFO | a1955-57.pdf batch_saved=63 progress=63/63
+2026-03-24 21:48:06,129 | INFO | a1955-57.pdf done status=completed written=63
+2026-03-24 21:48:07,024 | INFO | A1959_54.pdf total_chunks=100 already_done=0 pending=100
+2026-03-24 21:48:08,827 | INFO | A1959_54.pdf batch_saved=64 progress=64/100
+2026-03-24 21:48:09,889 | INFO | A1959_54.pdf batch_saved=36 progress=100/100
+2026-03-24 21:48:09,964 | INFO | A1959_54.pdf done status=completed written=100
+2026-03-24 21:48:41,390 | INFO | a1961-43.pdf total_chunks=3832 already_done=0 pending=3832
+2026-03-24 21:48:43,088 | INFO | a1961-43.pdf batch_saved=64 progress=64/3832
+2026-03-24 21:48:44,747 | INFO | a1961-43.pdf batch_saved=64 progress=128/3832
+2026-03-24 21:48:46,499 | INFO | a1961-43.pdf batch_saved=64 progress=192/3832
+2026-03-24 21:48:48,239 | INFO | a1961-43.pdf batch_saved=64 progress=256/3832
+2026-03-24 21:48:49,910 | INFO | a1961-43.pdf batch_saved=64 progress=320/3832
+2026-03-24 21:48:51,609 | INFO | a1961-43.pdf batch_saved=64 progress=384/3832
+2026-03-24 21:48:53,372 | INFO | a1961-43.pdf batch_saved=64 progress=448/3832
+2026-03-24 21:48:55,073 | INFO | a1961-43.pdf batch_saved=64 progress=512/3832
+2026-03-24 21:48:56,873 | INFO | a1961-43.pdf batch_saved=64 progress=576/3832
+2026-03-24 21:48:58,599 | INFO | a1961-43.pdf batch_saved=64 progress=640/3832
+2026-03-24 21:49:00,335 | INFO | a1961-43.pdf batch_saved=64 progress=704/3832
+2026-03-24 21:49:02,083 | INFO | a1961-43.pdf batch_saved=64 progress=768/3832
+2026-03-24 21:49:03,789 | INFO | a1961-43.pdf batch_saved=64 progress=832/3832
+2026-03-24 21:49:05,531 | INFO | a1961-43.pdf batch_saved=64 progress=896/3832
+2026-03-24 21:49:07,230 | INFO | a1961-43.pdf batch_saved=64 progress=960/3832
+2026-03-24 21:49:08,983 | INFO | a1961-43.pdf batch_saved=64 progress=1024/3832
+2026-03-24 21:49:10,700 | INFO | a1961-43.pdf batch_saved=64 progress=1088/3832
+2026-03-24 21:49:12,449 | INFO | a1961-43.pdf batch_saved=64 progress=1152/3832
+2026-03-24 21:49:14,171 | INFO | a1961-43.pdf batch_saved=64 progress=1216/3832
+2026-03-24 21:49:16,005 | INFO | a1961-43.pdf batch_saved=64 progress=1280/3832
+2026-03-24 21:49:17,688 | INFO | a1961-43.pdf batch_saved=64 progress=1344/3832
+2026-03-24 21:49:19,380 | INFO | a1961-43.pdf batch_saved=64 progress=1408/3832
+2026-03-24 21:49:21,089 | INFO | a1961-43.pdf batch_saved=64 progress=1472/3832
+2026-03-24 21:49:22,830 | INFO | a1961-43.pdf batch_saved=64 progress=1536/3832
+2026-03-24 21:49:24,561 | INFO | a1961-43.pdf batch_saved=64 progress=1600/3832
+2026-03-24 21:49:26,304 | INFO | a1961-43.pdf batch_saved=64 progress=1664/3832
+2026-03-24 21:49:28,083 | INFO | a1961-43.pdf batch_saved=64 progress=1728/3832
+2026-03-24 21:49:29,809 | INFO | a1961-43.pdf batch_saved=64 progress=1792/3832
+2026-03-24 21:49:31,560 | INFO | a1961-43.pdf batch_saved=64 progress=1856/3832
+2026-03-24 21:49:33,279 | INFO | a1961-43.pdf batch_saved=64 progress=1920/3832
+2026-03-24 21:49:35,010 | INFO | a1961-43.pdf batch_saved=64 progress=1984/3832
+2026-03-24 21:49:36,732 | INFO | a1961-43.pdf batch_saved=64 progress=2048/3832
+2026-03-24 21:49:38,480 | INFO | a1961-43.pdf batch_saved=64 progress=2112/3832
+2026-03-24 21:49:40,199 | INFO | a1961-43.pdf batch_saved=64 progress=2176/3832
+2026-03-24 21:49:41,949 | INFO | a1961-43.pdf batch_saved=64 progress=2240/3832
+2026-03-24 21:49:43,737 | INFO | a1961-43.pdf batch_saved=64 progress=2304/3832
+2026-03-24 21:49:45,541 | INFO | a1961-43.pdf batch_saved=64 progress=2368/3832
+2026-03-24 21:49:47,249 | INFO | a1961-43.pdf batch_saved=64 progress=2432/3832
+2026-03-24 21:49:49,313 | INFO | a1961-43.pdf batch_saved=64 progress=2496/3832
+2026-03-24 21:49:51,043 | INFO | a1961-43.pdf batch_saved=64 progress=2560/3832
+2026-03-24 21:49:52,773 | INFO | a1961-43.pdf batch_saved=64 progress=2624/3832
+2026-03-24 21:49:54,489 | INFO | a1961-43.pdf batch_saved=64 progress=2688/3832
+2026-03-24 21:49:56,258 | INFO | a1961-43.pdf batch_saved=64 progress=2752/3832
+2026-03-24 21:49:58,029 | INFO | a1961-43.pdf batch_saved=64 progress=2816/3832
+2026-03-24 21:49:59,792 | INFO | a1961-43.pdf batch_saved=64 progress=2880/3832
+2026-03-24 21:50:01,541 | INFO | a1961-43.pdf batch_saved=64 progress=2944/3832
+2026-03-24 21:50:03,301 | INFO | a1961-43.pdf batch_saved=64 progress=3008/3832
+2026-03-24 21:50:05,109 | INFO | a1961-43.pdf batch_saved=64 progress=3072/3832
+2026-03-24 21:50:06,837 | INFO | a1961-43.pdf batch_saved=64 progress=3136/3832
+2026-03-24 21:50:08,611 | INFO | a1961-43.pdf batch_saved=64 progress=3200/3832
+2026-03-24 21:50:10,328 | INFO | a1961-43.pdf batch_saved=64 progress=3264/3832
+2026-03-24 21:50:12,106 | INFO | a1961-43.pdf batch_saved=64 progress=3328/3832
+2026-03-24 21:50:13,945 | INFO | a1961-43.pdf batch_saved=64 progress=3392/3832
+2026-03-24 21:50:15,678 | INFO | a1961-43.pdf batch_saved=64 progress=3456/3832
+2026-03-24 21:50:17,438 | INFO | a1961-43.pdf batch_saved=64 progress=3520/3832
+2026-03-24 21:50:19,262 | INFO | a1961-43.pdf batch_saved=64 progress=3584/3832
+2026-03-24 21:50:21,036 | INFO | a1961-43.pdf batch_saved=64 progress=3648/3832
+2026-03-24 21:50:22,922 | INFO | a1961-43.pdf batch_saved=64 progress=3712/3832
+2026-03-24 21:50:24,735 | INFO | a1961-43.pdf batch_saved=64 progress=3776/3832
+2026-03-24 21:50:26,336 | INFO | a1961-43.pdf batch_saved=56 progress=3832/3832
+2026-03-24 21:50:26,408 | INFO | a1961-43.pdf done status=completed written=3832
+2026-03-24 21:50:27,369 | INFO | A1963-47.pdf total_chunks=62 already_done=0 pending=62
+2026-03-24 21:50:29,079 | INFO | A1963-47.pdf batch_saved=62 progress=62/62
+2026-03-24 21:50:29,152 | INFO | A1963-47.pdf done status=completed written=62
+2026-03-24 21:50:30,896 | INFO | A1967-37.pdf total_chunks=125 already_done=0 pending=125
+2026-03-24 21:50:32,728 | INFO | A1967-37.pdf batch_saved=64 progress=64/125
+2026-03-24 21:50:34,442 | INFO | A1967-37.pdf batch_saved=61 progress=125/125
+2026-03-24 21:50:34,511 | INFO | A1967-37.pdf done status=completed written=125
+2026-03-24 21:50:39,459 | INFO | a1988-59.pdf total_chunks=473 already_done=0 pending=473
+2026-03-24 21:50:41,272 | INFO | a1988-59.pdf batch_saved=64 progress=64/473
+2026-03-24 21:50:42,935 | INFO | a1988-59.pdf batch_saved=64 progress=128/473
+2026-03-24 21:50:44,518 | INFO | a1988-59.pdf batch_saved=64 progress=192/473
+2026-03-24 21:50:46,189 | INFO | a1988-59.pdf batch_saved=64 progress=256/473
+2026-03-24 21:50:47,968 | INFO | a1988-59.pdf batch_saved=64 progress=320/473
+2026-03-24 21:50:49,731 | INFO | a1988-59.pdf batch_saved=64 progress=384/473
+2026-03-24 21:50:51,512 | INFO | a1988-59.pdf batch_saved=64 progress=448/473
+2026-03-24 21:50:52,298 | INFO | a1988-59.pdf batch_saved=25 progress=473/473
+2026-03-24 21:50:52,369 | INFO | a1988-59.pdf done status=completed written=473
+2026-03-24 21:50:53,176 | INFO | A1999_42.pdf total_chunks=90 already_done=0 pending=90
+2026-03-24 21:50:55,054 | INFO | A1999_42.pdf batch_saved=64 progress=64/90
+2026-03-24 21:50:55,912 | INFO | A1999_42.pdf batch_saved=26 progress=90/90
+2026-03-24 21:50:55,989 | INFO | A1999_42.pdf done status=completed written=90
+2026-03-24 21:50:59,005 | INFO | A2003-12.pdf total_chunks=216 already_done=0 pending=216
+2026-03-24 21:51:00,880 | INFO | A2003-12.pdf batch_saved=64 progress=64/216
+2026-03-24 21:51:02,636 | INFO | A2003-12.pdf batch_saved=64 progress=128/216
+2026-03-24 21:51:04,438 | INFO | A2003-12.pdf batch_saved=64 progress=192/216
+2026-03-24 21:51:05,182 | INFO | A2003-12.pdf batch_saved=24 progress=216/216
+2026-03-24 21:51:05,253 | INFO | A2003-12.pdf done status=completed written=216
+2026-03-24 21:51:21,366 | INFO | A2013-18.pdf total_chunks=1600 already_done=0 pending=1600
+2026-03-24 21:51:23,138 | INFO | A2013-18.pdf batch_saved=64 progress=64/1600
+2026-03-24 21:51:24,729 | INFO | A2013-18.pdf batch_saved=64 progress=128/1600
+2026-03-24 21:51:26,349 | INFO | A2013-18.pdf batch_saved=64 progress=192/1600
+2026-03-24 21:51:28,079 | INFO | A2013-18.pdf batch_saved=64 progress=256/1600
+2026-03-24 21:51:29,788 | INFO | A2013-18.pdf batch_saved=64 progress=320/1600
+2026-03-24 21:51:31,520 | INFO | A2013-18.pdf batch_saved=64 progress=384/1600
+2026-03-24 21:51:33,222 | INFO | A2013-18.pdf batch_saved=64 progress=448/1600
+2026-03-24 21:51:34,978 | INFO | A2013-18.pdf batch_saved=64 progress=512/1600
+2026-03-24 21:51:36,737 | INFO | A2013-18.pdf batch_saved=64 progress=576/1600
+2026-03-24 21:51:38,433 | INFO | A2013-18.pdf batch_saved=64 progress=640/1600
+2026-03-24 21:51:40,182 | INFO | A2013-18.pdf batch_saved=64 progress=704/1600
+2026-03-24 21:51:41,780 | INFO | A2013-18.pdf batch_saved=64 progress=768/1600
+2026-03-24 21:51:43,464 | INFO | A2013-18.pdf batch_saved=64 progress=832/1600
+2026-03-24 21:51:45,278 | INFO | A2013-18.pdf batch_saved=64 progress=896/1600
+2026-03-24 21:51:47,083 | INFO | A2013-18.pdf batch_saved=64 progress=960/1600
+2026-03-24 21:51:48,817 | INFO | A2013-18.pdf batch_saved=64 progress=1024/1600
+2026-03-24 21:51:50,419 | INFO | A2013-18.pdf batch_saved=64 progress=1088/1600
+2026-03-24 21:51:52,232 | INFO | A2013-18.pdf batch_saved=64 progress=1152/1600
+2026-03-24 21:51:54,037 | INFO | A2013-18.pdf batch_saved=64 progress=1216/1600
+2026-03-24 21:51:55,888 | INFO | A2013-18.pdf batch_saved=64 progress=1280/1600
+2026-03-24 21:51:57,674 | INFO | A2013-18.pdf batch_saved=64 progress=1344/1600
+2026-03-24 21:51:59,647 | INFO | A2013-18.pdf batch_saved=64 progress=1408/1600
+2026-03-24 21:52:01,416 | INFO | A2013-18.pdf batch_saved=64 progress=1472/1600
+2026-03-24 21:52:03,208 | INFO | A2013-18.pdf batch_saved=64 progress=1536/1600
+2026-03-24 21:52:05,037 | INFO | A2013-18.pdf batch_saved=64 progress=1600/1600
+2026-03-24 21:52:05,109 | INFO | A2013-18.pdf done status=completed written=1600
+2026-03-24 21:52:09,921 | INFO | a2017-12.pdf total_chunks=555 already_done=0 pending=555
+2026-03-24 21:52:11,767 | INFO | a2017-12.pdf batch_saved=64 progress=64/555
+2026-03-24 21:52:13,601 | INFO | a2017-12.pdf batch_saved=64 progress=128/555
+2026-03-24 21:52:15,426 | INFO | a2017-12.pdf batch_saved=64 progress=192/555
+2026-03-24 21:52:17,630 | INFO | a2017-12.pdf batch_saved=64 progress=256/555
+2026-03-24 21:52:19,323 | INFO | a2017-12.pdf batch_saved=64 progress=320/555
+2026-03-24 21:52:21,211 | INFO | a2017-12.pdf batch_saved=64 progress=384/555
+2026-03-24 21:52:23,056 | INFO | a2017-12.pdf batch_saved=64 progress=448/555
+2026-03-24 21:52:24,850 | INFO | a2017-12.pdf batch_saved=64 progress=512/555
+2026-03-24 21:52:26,116 | INFO | a2017-12.pdf batch_saved=43 progress=555/555
+2026-03-24 21:52:26,188 | INFO | a2017-12.pdf done status=completed written=555
+2026-03-24 21:52:26,460 | INFO | a2019-20.pdf total_chunks=6 already_done=0 pending=6
+2026-03-24 21:52:26,828 | INFO | a2019-20.pdf batch_saved=6 progress=6/6
+2026-03-24 21:52:26,895 | INFO | a2019-20.pdf done status=completed written=6
+2026-03-24 21:52:27,998 | INFO | aa2005.pdf total_chunks=91 already_done=0 pending=91
+2026-03-24 21:52:29,710 | INFO | aa2005.pdf batch_saved=64 progress=64/91
+2026-03-24 21:52:30,537 | INFO | aa2005.pdf batch_saved=27 progress=91/91
+2026-03-24 21:52:30,617 | INFO | aa2005.pdf done status=completed written=91
+2026-03-24 21:52:31,579 | INFO | AA2012-32.pdf total_chunks=71 already_done=0 pending=71
+2026-03-24 21:52:33,504 | INFO | AA2012-32.pdf batch_saved=64 progress=64/71
+2026-03-24 21:52:33,859 | INFO | AA2012-32.pdf batch_saved=7 progress=71/71
+2026-03-24 21:52:33,922 | INFO | AA2012-32.pdf done status=completed written=71
+2026-03-24 21:52:34,271 | INFO | AAA1908___06.pdf total_chunks=9 already_done=0 pending=9
+2026-03-24 21:52:34,819 | INFO | AAA1908___06.pdf batch_saved=9 progress=9/9
+2026-03-24 21:52:34,891 | INFO | AAA1908___06.pdf done status=completed written=9
+2026-03-24 21:52:35,318 | INFO | dowry_prohibition.pdf total_chunks=19 already_done=0 pending=19
+2026-03-24 21:52:36,036 | INFO | dowry_prohibition.pdf batch_saved=19 progress=19/19
+2026-03-24 21:52:36,108 | INFO | dowry_prohibition.pdf done status=completed written=19
+2026-03-24 21:52:36,821 | INFO | ep_act_1986.pdf total_chunks=44 already_done=0 pending=44
+2026-03-24 21:52:38,137 | INFO | ep_act_1986.pdf batch_saved=44 progress=44/44
+2026-03-24 21:52:38,217 | INFO | ep_act_1986.pdf done status=completed written=44
+2026-03-24 21:52:38,600 | INFO | epidemic_diseases_act,1897.pdf total_chunks=17 already_done=0 pending=17
+2026-03-24 21:52:39,226 | INFO | epidemic_diseases_act,1897.pdf batch_saved=17 progress=17/17
+2026-03-24 21:52:39,371 | INFO | epidemic_diseases_act,1897.pdf done status=completed written=17
+2026-03-24 21:52:42,215 | INFO | iea_1872.pdf total_chunks=229 already_done=0 pending=229
+2026-03-24 21:52:44,102 | INFO | iea_1872.pdf batch_saved=64 progress=64/229
+2026-03-24 21:52:45,902 | INFO | iea_1872.pdf batch_saved=64 progress=128/229
+2026-03-24 21:52:47,658 | INFO | iea_1872.pdf batch_saved=64 progress=192/229
+2026-03-24 21:52:48,757 | INFO | iea_1872.pdf batch_saved=37 progress=229/229
+2026-03-24 21:52:48,833 | INFO | iea_1872.pdf done status=completed written=229
+2026-03-24 21:52:50,304 | INFO | indian_partnership_act_1932.pdf total_chunks=87 already_done=0 pending=87
+2026-03-24 21:52:52,117 | INFO | indian_partnership_act_1932.pdf batch_saved=64 progress=64/87
+2026-03-24 21:52:52,867 | INFO | indian_partnership_act_1932.pdf batch_saved=23 progress=87/87
+2026-03-24 21:52:52,938 | INFO | indian_partnership_act_1932.pdf done status=completed written=87
+2026-03-24 21:52:57,636 | INFO | indian_succession_act_1925.pdf total_chunks=443 already_done=0 pending=443
+2026-03-24 21:52:59,478 | INFO | indian_succession_act_1925.pdf batch_saved=64 progress=64/443
+2026-03-24 21:53:01,230 | INFO | indian_succession_act_1925.pdf batch_saved=64 progress=128/443
+2026-03-24 21:53:03,006 | INFO | indian_succession_act_1925.pdf batch_saved=64 progress=192/443
+2026-03-24 21:53:04,777 | INFO | indian_succession_act_1925.pdf batch_saved=64 progress=256/443
+2026-03-24 21:53:06,538 | INFO | indian_succession_act_1925.pdf batch_saved=64 progress=320/443
+2026-03-24 21:53:08,344 | INFO | indian_succession_act_1925.pdf batch_saved=64 progress=384/443
+2026-03-24 21:53:10,039 | INFO | indian_succession_act_1925.pdf batch_saved=59 progress=443/443
+2026-03-24 21:53:10,119 | INFO | indian_succession_act_1925.pdf done status=completed written=443
+2026-03-24 21:53:10,748 | INFO | ISdivII_NSAAct1980_20122018[1].pdf total_chunks=30 already_done=0 pending=30
+2026-03-24 21:53:11,737 | INFO | ISdivII_NSAAct1980_20122018[1].pdf batch_saved=30 progress=30/30
+2026-03-24 21:53:11,802 | INFO | ISdivII_NSAAct1980_20122018[1].pdf done status=completed written=30
+2026-03-24 21:53:13,326 | INFO | it_act_2000_updated.pdf total_chunks=161 already_done=0 pending=161
+2026-03-24 21:53:15,173 | INFO | it_act_2000_updated.pdf batch_saved=64 progress=64/161
+2026-03-24 21:53:16,928 | INFO | it_act_2000_updated.pdf batch_saved=64 progress=128/161
+2026-03-24 21:53:17,909 | INFO | it_act_2000_updated.pdf batch_saved=33 progress=161/161
+2026-03-24 21:53:17,986 | INFO | it_act_2000_updated.pdf done status=completed written=161
+2026-03-24 21:53:18,340 | INFO | muslim_women_(protection_of_rights_on_divorce)_act,_1986.pdf total_chunks=14 already_done=0 pending=14
+2026-03-24 21:53:18,920 | INFO | muslim_women_(protection_of_rights_on_divorce)_act,_1986.pdf batch_saved=14 progress=14/14
+2026-03-24 21:53:18,998 | INFO | muslim_women_(protection_of_rights_on_divorce)_act,_1986.pdf done status=completed written=14
+2026-03-24 21:53:22,293 | INFO | narcotic-drugs-and-psychotropic-substances-act-1985.pdf total_chunks=228 already_done=0 pending=228
+2026-03-24 21:53:24,076 | INFO | narcotic-drugs-and-psychotropic-substances-act-1985.pdf batch_saved=64 progress=64/228
+2026-03-24 21:53:25,827 | INFO | narcotic-drugs-and-psychotropic-substances-act-1985.pdf batch_saved=64 progress=128/228
+2026-03-24 21:53:27,607 | INFO | narcotic-drugs-and-psychotropic-substances-act-1985.pdf batch_saved=64 progress=192/228
+2026-03-24 21:53:28,679 | INFO | narcotic-drugs-and-psychotropic-substances-act-1985.pdf batch_saved=36 progress=228/228
+2026-03-24 21:53:28,741 | INFO | narcotic-drugs-and-psychotropic-substances-act-1985.pdf done status=completed written=228
+2026-03-24 21:53:30,020 | INFO | negotiable_instruments_act,_1881.pdf total_chunks=129 already_done=0 pending=129
+2026-03-24 21:53:31,907 | INFO | negotiable_instruments_act,_1881.pdf batch_saved=64 progress=64/129
+2026-03-24 21:53:33,667 | INFO | negotiable_instruments_act,_1881.pdf batch_saved=64 progress=128/129
+2026-03-24 21:53:33,837 | INFO | negotiable_instruments_act,_1881.pdf batch_saved=1 progress=129/129
+2026-03-24 21:53:33,913 | INFO | negotiable_instruments_act,_1881.pdf done status=completed written=129
+2026-03-24 21:53:34,202 | INFO | payment_of_bonus_act_1965.pdf total_chunks=84 already_done=0 pending=84
+2026-03-24 21:53:36,021 | INFO | payment_of_bonus_act_1965.pdf batch_saved=64 progress=64/84
+2026-03-24 21:53:36,677 | INFO | payment_of_bonus_act_1965.pdf batch_saved=20 progress=84/84
+2026-03-24 21:53:36,749 | INFO | payment_of_bonus_act_1965.pdf done status=completed written=84
+2026-03-24 21:53:37,414 | INFO | pc_act,_1988.pdf total_chunks=74 already_done=0 pending=74
+2026-03-24 21:53:39,216 | INFO | pc_act,_1988.pdf batch_saved=64 progress=64/74
+2026-03-24 21:53:39,621 | INFO | pc_act,_1988.pdf batch_saved=10 progress=74/74
+2026-03-24 21:53:39,699 | INFO | pc_act,_1988.pdf done status=completed written=74
+2026-03-24 21:53:40,490 | INFO | protection_of_women_from_domestic_violence_act,_2005.pdf total_chunks=48 already_done=0 pending=48
+2026-03-24 21:53:41,817 | INFO | protection_of_women_from_domestic_violence_act,_2005.pdf batch_saved=48 progress=48/48
+2026-03-24 21:53:41,887 | INFO | protection_of_women_from_domestic_violence_act,_2005.pdf done status=completed written=48
+2026-03-24 21:53:43,582 | INFO | REPRESENTATION_OF_THE_PEOPLE_ACT,_1950.pdf total_chunks=108 already_done=0 pending=108
+2026-03-24 21:53:45,451 | INFO | REPRESENTATION_OF_THE_PEOPLE_ACT,_1950.pdf batch_saved=64 progress=64/108
+2026-03-24 21:53:46,730 | INFO | REPRESENTATION_OF_THE_PEOPLE_ACT,_1950.pdf batch_saved=44 progress=108/108
+2026-03-24 21:53:46,806 | INFO | REPRESENTATION_OF_THE_PEOPLE_ACT,_1950.pdf done status=completed written=108
+2026-03-24 21:53:47,420 | INFO | scheduled_castes_and_the_scheduled_tribes.pdf total_chunks=63 already_done=0 pending=63
+2026-03-24 21:53:49,277 | INFO | scheduled_castes_and_the_scheduled_tribes.pdf batch_saved=63 progress=63/63
+2026-03-24 21:53:49,346 | INFO | scheduled_castes_and_the_scheduled_tribes.pdf done status=completed written=63
+2026-03-24 21:53:50,443 | INFO | special_marriage_act.pdf total_chunks=86 already_done=0 pending=86
+2026-03-24 21:53:52,275 | INFO | special_marriage_act.pdf batch_saved=64 progress=64/86
+2026-03-24 21:53:53,005 | INFO | special_marriage_act.pdf batch_saved=22 progress=86/86
+2026-03-24 21:53:53,077 | INFO | special_marriage_act.pdf done status=completed written=86
+2026-03-24 21:53:54,813 | INFO | the_arbitration_and_conciliation_act,_1996.pdf total_chunks=232 already_done=0 pending=232
+2026-03-24 21:53:56,647 | INFO | the_arbitration_and_conciliation_act,_1996.pdf batch_saved=64 progress=64/232
+2026-03-24 21:53:58,469 | INFO | the_arbitration_and_conciliation_act,_1996.pdf batch_saved=64 progress=128/232
+2026-03-24 21:54:00,229 | INFO | the_arbitration_and_conciliation_act,_1996.pdf batch_saved=64 progress=192/232
+2026-03-24 21:54:01,389 | INFO | the_arbitration_and_conciliation_act,_1996.pdf batch_saved=40 progress=232/232
+2026-03-24 21:54:01,459 | INFO | the_arbitration_and_conciliation_act,_1996.pdf done status=completed written=232
+2026-03-24 21:54:15,170 | INFO | the_code_of_civil_procedure,_1908.pdf total_chunks=1299 already_done=0 pending=1299
+2026-03-24 21:54:16,968 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=64/1299
+2026-03-24 21:54:18,742 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=128/1299
+2026-03-24 21:54:20,532 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=192/1299
+2026-03-24 21:54:22,333 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=256/1299
+2026-03-24 21:54:24,070 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=320/1299
+2026-03-24 21:54:25,856 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=384/1299
+2026-03-24 21:54:27,625 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=448/1299
+2026-03-24 21:54:29,501 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=512/1299
+2026-03-24 21:54:31,386 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=576/1299
+2026-03-24 21:54:33,157 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=640/1299
+2026-03-24 21:54:34,925 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=704/1299
+2026-03-24 21:54:36,744 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=768/1299
+2026-03-24 21:54:38,541 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=832/1299
+2026-03-24 21:54:40,364 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=896/1299
+2026-03-24 21:54:42,168 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=960/1299
+2026-03-24 21:54:44,016 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=1024/1299
+2026-03-24 21:54:45,835 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=1088/1299
+2026-03-24 21:54:47,581 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=1152/1299
+2026-03-24 21:54:49,366 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=1216/1299
+2026-03-24 21:54:51,147 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=64 progress=1280/1299
+2026-03-24 21:54:51,796 | INFO | the_code_of_civil_procedure,_1908.pdf batch_saved=19 progress=1299/1299
+2026-03-24 21:54:51,866 | INFO | the_code_of_civil_procedure,_1908.pdf done status=completed written=1299
+2026-03-24 21:55:02,423 | INFO | the_code_of_criminal_procedure,_1973.pdf total_chunks=1093 already_done=0 pending=1093
+2026-03-24 21:55:04,189 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=64/1093
+2026-03-24 21:55:05,898 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=128/1093
+2026-03-24 21:55:07,647 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=192/1093
+2026-03-24 21:55:09,416 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=256/1093
+2026-03-24 21:55:11,225 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=320/1093
+2026-03-24 21:55:12,977 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=384/1093
+2026-03-24 21:55:14,759 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=448/1093
+2026-03-24 21:55:16,406 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=512/1093
+2026-03-24 21:55:18,115 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=576/1093
+2026-03-24 21:55:19,921 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=640/1093
+2026-03-24 21:55:21,683 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=704/1093
+2026-03-24 21:55:23,484 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=768/1093
+2026-03-24 21:55:25,210 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=832/1093
+2026-03-24 21:55:26,969 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=896/1093
+2026-03-24 21:55:28,767 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=960/1093
+2026-03-24 21:55:30,635 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=1024/1093
+2026-03-24 21:55:32,346 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=64 progress=1088/1093
+2026-03-24 21:55:32,625 | INFO | the_code_of_criminal_procedure,_1973.pdf batch_saved=5 progress=1093/1093
+2026-03-24 21:55:32,692 | INFO | the_code_of_criminal_procedure,_1973.pdf done status=completed written=1093
+2026-03-24 21:55:35,494 | INFO | the_employees_state_insurance_act,_1948_no._34_of_1948_date_19.04.1948.pdf total_chunks=234 already_done=0 pending=234
+2026-03-24 21:55:37,336 | INFO | the_employees_state_insurance_act,_1948_no._34_of_1948_date_19.04.1948.pdf batch_saved=64 progress=64/234
+2026-03-24 21:55:39,251 | INFO | the_employees_state_insurance_act,_1948_no._34_of_1948_date_19.04.1948.pdf batch_saved=64 progress=128/234
+2026-03-24 21:55:41,086 | INFO | the_employees_state_insurance_act,_1948_no._34_of_1948_date_19.04.1948.pdf batch_saved=64 progress=192/234
+2026-03-24 21:55:42,372 | INFO | the_employees_state_insurance_act,_1948_no._34_of_1948_date_19.04.1948.pdf batch_saved=42 progress=234/234
+2026-03-24 21:55:42,446 | INFO | the_employees_state_insurance_act,_1948_no._34_of_1948_date_19.04.1948.pdf done status=completed written=234
+2026-03-24 21:55:43,437 | INFO | the_immoral_traffic_(prevention)_act,_1956.pdf total_chunks=82 already_done=0 pending=82
+2026-03-24 21:55:45,316 | INFO | the_immoral_traffic_(prevention)_act,_1956.pdf batch_saved=64 progress=64/82
+2026-03-24 21:55:45,976 | INFO | the_immoral_traffic_(prevention)_act,_1956.pdf batch_saved=18 progress=82/82
+2026-03-24 21:55:46,039 | INFO | the_immoral_traffic_(prevention)_act,_1956.pdf done status=completed written=82
+2026-03-24 21:55:47,756 | INFO | the_indian_forest_act,_1927.pdf total_chunks=174 already_done=0 pending=174
+2026-03-24 21:55:49,701 | INFO | the_indian_forest_act,_1927.pdf batch_saved=64 progress=64/174
+2026-03-24 21:55:51,466 | INFO | the_indian_forest_act,_1927.pdf batch_saved=64 progress=128/174
+2026-03-24 21:55:52,821 | INFO | the_indian_forest_act,_1927.pdf batch_saved=46 progress=174/174
+2026-03-24 21:55:52,895 | INFO | the_indian_forest_act,_1927.pdf done status=completed written=174
+2026-03-24 21:55:56,577 | INFO | the_industrial_disputes_act.pdf total_chunks=301 already_done=0 pending=301
+2026-03-24 21:55:58,605 | INFO | the_industrial_disputes_act.pdf batch_saved=64 progress=64/301
+2026-03-24 21:56:00,455 | INFO | the_industrial_disputes_act.pdf batch_saved=64 progress=128/301
+2026-03-24 21:56:02,255 | INFO | the_industrial_disputes_act.pdf batch_saved=64 progress=192/301
+2026-03-24 21:56:04,046 | INFO | the_industrial_disputes_act.pdf batch_saved=64 progress=256/301
+2026-03-24 21:56:05,370 | INFO | the_industrial_disputes_act.pdf batch_saved=45 progress=301/301
+2026-03-24 21:56:05,439 | INFO | the_industrial_disputes_act.pdf done status=completed written=301
+2026-03-24 21:56:10,411 | INFO | the_insolvency_and_bankruptcy_code,_2016.pdf total_chunks=509 already_done=0 pending=509
+2026-03-24 21:56:12,305 | INFO | the_insolvency_and_bankruptcy_code,_2016.pdf batch_saved=64 progress=64/509
+2026-03-24 21:56:14,152 | INFO | the_insolvency_and_bankruptcy_code,_2016.pdf batch_saved=64 progress=128/509
+2026-03-24 21:56:16,057 | INFO | the_insolvency_and_bankruptcy_code,_2016.pdf batch_saved=64 progress=192/509
+2026-03-24 21:56:17,832 | INFO | the_insolvency_and_bankruptcy_code,_2016.pdf batch_saved=64 progress=256/509
+2026-03-24 21:56:19,546 | INFO | the_insolvency_and_bankruptcy_code,_2016.pdf batch_saved=64 progress=320/509
+2026-03-24 21:56:21,216 | INFO | the_insolvency_and_bankruptcy_code,_2016.pdf batch_saved=64 progress=384/509
+2026-03-24 21:56:22,954 | INFO | the_insolvency_and_bankruptcy_code,_2016.pdf batch_saved=64 progress=448/509
+2026-03-24 21:56:24,646 | INFO | the_insolvency_and_bankruptcy_code,_2016.pdf batch_saved=61 progress=509/509
+2026-03-24 21:56:24,718 | INFO | the_insolvency_and_bankruptcy_code,_2016.pdf done status=completed written=509
+2026-03-24 21:56:25,342 | INFO | the_maternity_benefit_act,_1961.pdf total_chunks=47 already_done=0 pending=47
+2026-03-24 21:56:26,756 | INFO | the_maternity_benefit_act,_1961.pdf batch_saved=47 progress=47/47
+2026-03-24 21:56:26,821 | INFO | the_maternity_benefit_act,_1961.pdf done status=completed written=47
+2026-03-24 21:56:31,247 | INFO | the_right_of_children_to_free_and_compulsory_education_act_2009.pdf total_chunks=56 already_done=0 pending=56
+2026-03-24 21:56:32,826 | INFO | the_right_of_children_to_free_and_compulsory_education_act_2009.pdf batch_saved=56 progress=56/56
+2026-03-24 21:56:32,906 | INFO | the_right_of_children_to_free_and_compulsory_education_act_2009.pdf done status=completed written=56
+2026-03-24 21:56:34,412 | INFO | the_rights_of_persons_with_disabilities_act,_2016.pdf total_chunks=150 already_done=0 pending=150
+2026-03-24 21:56:36,004 | INFO | the_rights_of_persons_with_disabilities_act,_2016.pdf batch_saved=64 progress=64/150
+2026-03-24 21:56:37,863 | INFO | the_rights_of_persons_with_disabilities_act,_2016.pdf batch_saved=64 progress=128/150
+2026-03-24 21:56:38,561 | INFO | the_rights_of_persons_with_disabilities_act,_2016.pdf batch_saved=22 progress=150/150
+2026-03-24 21:56:38,614 | INFO | the_rights_of_persons_with_disabilities_act,_2016.pdf done status=completed written=150
+2026-03-24 21:56:38,687 | INFO | Training completed | files=55 chunks_added=13820 total_chunks=15943

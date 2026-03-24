@@ -9,7 +9,30 @@ const api = axios.create({
 });
 
 // Chat
-export const chatApi = async (data) => {
-  const res = await api.post("/chat/", data);
+export const chatApi = async ({ query, token }) => {
+  const requestConfig = {
+    params: { q: query },
+  };
+
+  if (token) {
+    requestConfig.headers = {
+      Authorization: `Bearer ${token}`,
+    };
+  }
+
+  const res = await api.get("/chat/", requestConfig);
+  return res.data;
+};
+
+export const chatHistoryApi = async ({ token }) => {
+  const requestConfig = {};
+
+  if (token) {
+    requestConfig.headers = {
+      Authorization: `Bearer ${token}`,
+    };
+  }
+
+  const res = await api.get("/chat/history", requestConfig);
   return res.data;
 };
