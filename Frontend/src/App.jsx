@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-
+import Team from "./components/Team/TeamSection";
 import {
   ArrowRightIcon,
   SparklesIcon,
@@ -398,6 +398,7 @@ function App() {
       <HowItWorks />
       <UseCasesSection />
       <CTASection />
+      <Team />
     </div>
   );
 }
