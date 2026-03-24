@@ -1,8 +1,11 @@
-import { ArrowPathRoundedSquareIcon } from "@heroicons/react/16/solid";
-
 function Logo({ className = "", ...props }) {
   return (
-    <ArrowPathRoundedSquareIcon className={`size-5 ${className}`} {...props} />
+    <img
+      src="/favicon.svg"
+      alt="LawGenie logo"
+      className={`size-5 ${className}`}
+      {...props}
+    />
   );
 }
 
