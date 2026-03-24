@@ -38,6 +38,7 @@ export default function Navbar() {
     { name: "Features", id: "features" },
     { name: "How It Works", id: "how-it-works" },
     { name: "Use Cases", id: "use-cases" },
+    {name: "Team", id: "team" },
   ];
 
   const navItems =
