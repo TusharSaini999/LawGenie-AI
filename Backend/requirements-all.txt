@@ -1,3 +1,6 @@
+# LawGenie AI Backend - Complete Requirements
+# This includes dependencies for both chat and training services
+
 # ================== API Server ==================
 fastapi==0.111.1
 uvicorn[standard]==0.23.2
@@ -28,7 +31,6 @@ langchain-text-splitters==0.0.1
 # ================== ML / Embeddings ==================
 numpy==1.26.4
 scikit-learn==1.4.1.post1
-
 sentence-transformers==2.7.0
 torch==2.2.2
 transformers==4.38.2

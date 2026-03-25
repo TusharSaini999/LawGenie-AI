@@ -1,9 +1,27 @@
+# ============================================================
+# TRAINING MODULE - TRAINING SERVICE ONLY
+# ============================================================
+# This module handles PDF ingestion, text splitting, and
+# embedding generation for legal documents.
+# 
+# TRAINING-ONLY DEPENDENCIES:
+# - PyPDF2 (PDF reading)
+# - langchain-core, langchain-text-splitters (text processing)
+# - sentence-transformers (embeddings)
+# 
+# NOT USED BY CHAT SERVICE (main.py)
+# Run only via training_service.py
+# ============================================================
+
 import logging
 import csv
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Tuple
 
+# ============================================================
+# TRAINING-ONLY IMPORTS
+# ============================================================
 from PyPDF2 import PdfReader
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter

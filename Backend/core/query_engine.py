@@ -2,6 +2,10 @@ from typing import Dict, List
 from functools import lru_cache
 
 import numpy as np
+# ============================================================
+# SHARED DEPENDENCY: sentence_transformers
+# Used by BOTH chat (query encoding) and training (document embedding)
+# ============================================================
 from sentence_transformers import SentenceTransformer
 
 from config.settings import settings

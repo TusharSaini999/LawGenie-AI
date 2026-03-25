@@ -8,9 +8,10 @@ It combines a FastAPI backend for retrieval, training, and chat sessions with a 
 - Legal Q&A chat with conversation history
 - JWT-based session continuity for chat users
 - MongoDB-backed document storage and retrieval
-- Training pipeline to ingest and index legal data
+- Training pipeline to ingest and index legal data (optional, separate service)
 - Search endpoint with multiple retrieval modes
 - Responsive React interface with theme support
+- **Two-part architecture**: Chat and Training services run independently
 
 ## Repository Structure
 
@@ -89,13 +90,27 @@ MONGODB_DB_NAME=lawgenie
 GROQ_MODEL=openai/gpt-oss-120b
 ```
 
-Run API:
+**Run Chat Service (Main Deployment):**
 
 ```bash
 uvicorn main:app --reload
 ```
 
 Backend docs: `http://127.0.0.1:8000/docs`
+
+**Optional: Run Training Service (Terminal 2):**
+
+```bash
+uvicorn training_service:training_app --port 8001 --reload
+```
+
+Training docs: `http://127.0.0.1:8001/docs`
+
+**Backend is now split into two services:**
+- `main.py` (Chat + Search) - Always needed, port 8000
+- `training_service.py` (Training) - Optional, port 8001
+
+See [Backend/TWO_PART_ARCHITECTURE.md](Backend/TWO_PART_ARCHITECTURE.md) for details.
 
 ### 3) Frontend setup
 

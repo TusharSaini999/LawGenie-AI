@@ -1,6 +1,15 @@
 # LawGenie AI Backend
 
-FastAPI backend for LawGenie AI. This service handles legal chat responses, retrieval/search over indexed legal content, and training pipeline execution.
+FastAPI backend for LawGenie AI. This service handles legal chat responses, retrieval/search over indexed legal content, and optional training pipeline execution.
+
+## 🎯 Architecture: Two Independent Services
+
+LawGenie AI Backend is now split into **two independent services** that share a MongoDB data layer:
+
+- **Main Chat Service** (`main.py`) - Always required for deployment
+- **Training Service** (`training_service.py`) - Optional, runs separately
+
+**See [TWO_PART_ARCHITECTURE.md](TWO_PART_ARCHITECTURE.md) for detailed architecture documentation.**
 
 ## Stack
 
@@ -14,13 +23,19 @@ FastAPI backend for LawGenie AI. This service handles legal chat responses, retr
 
 ```text
 Backend/
-├─ config/            # App settings and env handling
-├─ core/              # Chat, query, training, and data logic
-├─ middleware/        # JWT and session middleware helpers
-├─ routes/            # API route modules
-├─ data/              # Local data, logs, and PDF processing support
-├─ main.py            # FastAPI app entrypoint
-└─ requirements.txt
+├─ config/                        # App settings and env handling
+├─ core/                          # Chat, query, training, and data logic
+├─ middleware/                    # JWT and session middleware helpers
+├─ routes/                        # API route modules
+├─ data/                          # Local data, logs, and PDF processing support
+├─ main.py                        # Chat service entrypoint (production)
+├─ training_service.py            # Training service entrypoint (optional)
+├─ TWO_PART_ARCHITECTURE.md       # Architecture and deployment documentation
+├─ REQUIREMENTS.md                # Requirements files explanation
+├─ requirements.txt               # All dependencies (dev/both services)
+├─ requirements-chat.txt          # Chat service only (production recommended)
+├─ requirements-training.txt      # Training service only
+└─ requirements-all.txt           # Alias for requirements.txt
 ```
 
 ## Prerequisites
@@ -37,17 +52,36 @@ Backend/
 python -m venv .venv
 ```
 
-Windows PowerShell:
+**Windows PowerShell:**
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
 ```
 
+**macOS/Linux:**
+
+```bash
+source .venv/bin/activate
+```
+
 2. Install dependencies.
 
+**For development (both services):**
 ```bash
 pip install -r requirements.txt
 ```
+
+**For production chat service only (recommended):**
+```bash
+pip install -r requirements-chat.txt
+```
+
+**For training service only:**
+```bash
+pip install -r requirements-training.txt
+```
+
+See [REQUIREMENTS.md](REQUIREMENTS.md) for detailed requirements information.
 
 3. Create `Backend/.env`.
 
@@ -81,24 +115,42 @@ CHAT_EXPIRY_TIME=86400
 
 ## Run
 
+### Terminal 1: Chat Service (Main Deployment)
+
 ```bash
 uvicorn main:app --reload
 ```
 
-API docs:
+- Chat API: `http://127.0.0.1:8000`
+- Docs: `http://127.0.0.1:8000/docs`
 
-- Swagger UI: `http://127.0.0.1:8000/docs`
-- ReDoc: `http://127.0.0.1:8000/redoc`
+### Terminal 2: Training Service (Optional)
+
+```bash
+uvicorn training_service:training_app --port 8001 --reload
+```
+
+- Training API: `http://127.0.0.1:8001`
+- Docs: `http://127.0.0.1:8001/docs`
 
 ## API Routes
+
+### Chat Service (main.py - port 8000)
 
 - `GET /chat/?q=<query>`: Generate AI legal response and update history
 - `GET /chat/history`: Return history for authenticated token
 - `GET /search/?q=<query>&top_k=5&mode=auto`: Search indexed legal content
+- `GET /health`: Check chat service status
+
+### Training Service (training_service.py - port 8001)
+
 - `POST /train/`: Trigger ingestion/training process
+- `GET /health`: Check training service status
 
 ## Notes
 
 - CORS is configured in `main.py` for local frontend origins.
 - Chat route supports bearer token session continuity.
 - Keep production secrets out of source control.
+- **Chat service is standalone** and does not require training.
+- See [TWO_PART_ARCHITECTURE.md](TWO_PART_ARCHITECTURE.md) for production deployment strategies.
