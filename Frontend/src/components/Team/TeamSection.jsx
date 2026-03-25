@@ -1,3 +1,4 @@
+
 // @ts-nocheck
 import TeamCard from "./TeamCard";
 import shobhitPhoto from "../../assets/shobhit.jpg";
@@ -6,41 +7,43 @@ import siddarthPhoto from "../../assets/siddarth.jpeg";
 const teamData = [
   {
     id: 1,
-    name: "Siddhart Kumar",
+    name: "Siddharth Kumar",
     role: "Frontend Lead",
-    shortDescription: "Builds responsive interfaces and connects frontend flows with backend and AI features.",
+    shortDescription:
+      "Builds responsive React interfaces and contributes to AI features including RAG and LLM APIs.",
     expertise: "Frontend + Backend + AI",
     image: siddarthPhoto,
-    linkedin: "https://www.linkedin.com/in/siddharth-kumar-3855b231/",
-    github: "https://github.com/sidk-dev"
+    linkedin: "https://www.linkedin.com/in/siddharth-kumar-3855b2311/",
+    github: "https://github.com/sidk-dev",
   },
   {
     id: 2,
-    name: "Tushar Sahni",
+    name: "Tushar Saini",
     role: "Backend Lead",
-    shortDescription: "Designs robust APIs, manages database architecture, and powers intelligent backend systems.",
+    shortDescription:
+      "Designs robust APIs, manages database architecture, and builds AI-powered backend systems.",
     expertise: "Backend + DB + AI",
     image: tusharPhoto,
     linkedin: "https://www.linkedin.com/in/tushar-saini-105865373/",
-    github: "https://github.com/TusharSaini999"
+    github: "https://github.com/TusharSaini999",
   },
   {
     id: 3,
     name: "Shobhit Singh",
-    role: "Interconnection Lead",
-    shortDescription: "Aligns frontend, backend, and data preprocessing modules for smooth end-to-end integration.",
+    role: "Integration Lead",
+    shortDescription:
+      "Aligns frontend, backend, and data preprocessing modules for smooth end-to-end integration.",
     expertise: "Frontend + Backend + DP",
     image: shobhitPhoto,
     linkedin: "https://www.linkedin.com/in/shobhit115/",
-    github: "https://github.com/shobhit115"
-  }
+    github: "https://github.com/shobhit115",
+  },
 ];
 
 const TeamSection = () => {
   return (
     <section className="py-24 bg-bg" id="team">
       <div className="max-w-7xl mx-auto px-6">
-
         {/* Section Header */}
         <div className="text-center mb-20">
           <h2 className="text-sm font-bold text-(--color-primary) uppercase tracking-[0.3em] mb-4">
@@ -50,7 +53,9 @@ const TeamSection = () => {
             Meet the Minds Behind LawGenie
           </p>
           <p className="max-w-3xl mx-auto text-base md:text-lg text-t-secondary mb-6 leading-relaxed">
-            Our team combines legal-tech research, product engineering, and practical AI implementation to build a reliable platform for legal discovery, smarter responses, and scalable user experience.
+            Our team combines legal-tech research, product engineering, and
+            practical AI implementation to build a reliable platform for legal
+            discovery, smarter responses, and scalable user experience.
           </p>
           <div className="h-1 w-20 bg-(--color-primary) mx-auto rounded-full" />
         </div>
@@ -61,7 +66,6 @@ const TeamSection = () => {
             <TeamCard key={member.id} {...member} />
           ))}
         </div>
-
       </div>
     </section>
   );
