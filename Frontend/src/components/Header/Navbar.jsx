@@ -87,7 +87,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-surface/60 border-b border-border fixed top-0 left-0 right-0 text-t-primary backdrop-filter backdrop-blur-lg border-b border-white/20">
+    <nav className="bg-surface/60 border-b border-border fixed top-0 left-0 right-0 text-t-primary backdrop-filter backdrop-blur-lg">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-8">
         {/*
           ⚠️ If you change h-14 / sm:h-16 below, 
