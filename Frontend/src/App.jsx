@@ -406,8 +406,8 @@ function App() {
       <FeaturesSection />
       <HowItWorks />
       <UseCasesSection />
-      <CTASection />
       <Team />
+      <CTASection />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-const TeamCard = ({ name, role, image, linkedin = "#", github = "#" }) => {
+const TeamCard = ({ name, role, shortDescription, expertise, image, linkedin = "#", github = "#" }) => {
   return (
     <div className="group relative bg-(--color-surface) border border-(--color-border) rounded-2xl p-8 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 overflow-hidden">
       
@@ -23,6 +23,16 @@ const TeamCard = ({ name, role, image, linkedin = "#", github = "#" }) => {
         <p className="text-sm font-medium text-(--color-primary) uppercase tracking-widest mb-6">
           {role}
         </p>
+        {shortDescription && (
+          <p className="text-sm text-t-secondary text-center mb-4 leading-relaxed">
+            {shortDescription}
+          </p>
+        )}
+        {expertise && (
+          <p className="text-sm text-t-secondary text-center mb-6 leading-relaxed">
+            {expertise}
+          </p>
+        )}
 
         {/* Custom SVG Social Icons (No dependencies) */}
         <div className="flex gap-4">

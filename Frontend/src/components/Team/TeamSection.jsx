@@ -6,8 +6,10 @@ import siddarthPhoto from "../../assets/siddarth.jpeg";
 const teamData = [
   {
     id: 1,
-    name: "Siddhant Kumar",
-    role: "Co-Founder",
+    name: "Siddhart Kumar",
+    role: "Frontend Lead",
+    shortDescription: "Builds responsive interfaces and connects frontend flows with backend and AI features.",
+    expertise: "Frontend + Backend + AI",
     image: siddarthPhoto,
     linkedin: "https://www.linkedin.com/in/siddharth-kumar-3855b231/",
     github: "https://github.com/sidk-dev"
@@ -15,7 +17,9 @@ const teamData = [
   {
     id: 2,
     name: "Tushar Sahni",
-    role: "Founder",
+    role: "Backend Lead",
+    shortDescription: "Designs robust APIs, manages database architecture, and powers intelligent backend systems.",
+    expertise: "Backend + DB + AI",
     image: tusharPhoto,
     linkedin: "https://www.linkedin.com/in/tushar-saini-105865373/",
     github: "https://github.com/TusharSaini999"
@@ -23,7 +27,9 @@ const teamData = [
   {
     id: 3,
     name: "Shobhit Singh",
-    role: "Co-Founder",
+    role: "Interconnection Lead",
+    shortDescription: "Aligns frontend, backend, and data preprocessing modules for smooth end-to-end integration.",
+    expertise: "Frontend + Backend + DP",
     image: shobhitPhoto,
     linkedin: "https://www.linkedin.com/in/shobhit115/",
     github: "https://github.com/shobhit115"
@@ -42,6 +48,9 @@ const TeamSection = () => {
           </h2>
           <p className="text-4xl md:text-5xl font-black text-(--color-t-primary) mb-6">
             Meet the Minds Behind LawGenie
+          </p>
+          <p className="max-w-3xl mx-auto text-base md:text-lg text-t-secondary mb-6 leading-relaxed">
+            Our team combines legal-tech research, product engineering, and practical AI implementation to build a reliable platform for legal discovery, smarter responses, and scalable user experience.
           </p>
           <div className="h-1 w-20 bg-(--color-primary) mx-auto rounded-full" />
         </div>
