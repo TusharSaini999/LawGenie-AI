@@ -148,7 +148,6 @@ Base URL: `http://127.0.0.1:8000`
 
 - Backend CORS currently allows selected localhost origins.
 - Frontend API layer is in `Frontend/src/api` and `Frontend/src/services`.
-- Chat authorization uses `Authorization: Bearer <token>` when available.
 
 ## Contributing
 
