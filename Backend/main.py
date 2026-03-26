@@ -33,7 +33,8 @@ app.add_middleware(
     # List of origins that are allowed to make requests
     # Include active frontend dev ports and common local hosts.
     allow_origins=[
-        "https://law-genie-ai.vercel.app"
+        "https://law-genie-ai.vercel.app",
+        "http://localhost:5178"
     ],
     allow_credentials=True,     # Allow cookies/auth headers
     # Allow all methods (GET, POST, PUT, DELETE, etc.)

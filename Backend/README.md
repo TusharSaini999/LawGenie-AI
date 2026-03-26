@@ -87,7 +87,8 @@ See [REQUIREMENTS.md](REQUIREMENTS.md) for detailed requirements information.
 
 ```env
 GROQ_API_KEY=your_groq_api_key
-GROQ_MODEL=openai/gpt-oss-120b
+GROQ_MODEL=meta-llama/llama-4-scout-17b-16e-instruct
+GROQ_FALLBACK_MODEL=openai/gpt-oss-120b
 GROQ_MAX_COMPLETION_TOKENS=1200
 GROQ_REASONING_EFFORT=low
 

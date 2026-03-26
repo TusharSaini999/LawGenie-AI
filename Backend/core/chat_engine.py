@@ -53,6 +53,7 @@ Rules:
 
 Response Guidelines:
 - Give structured answers when possible.
+- Keep answers precise and concise. Avoid unnecessary detail.
 - Mention relevant laws/sections when applicable.
 - Provide step-by-step guidance.
 - Suggest practical next actions.
@@ -74,8 +75,10 @@ Tone:
 - Helpful, calm, trustworthy, and supportive.
 
 Output Format:
-- Output should be in Markdown format.
-- Use bullet points, numbered lists, and bold text for clarity.
+- Output must be valid Markdown.
+- Use bullet points, numbered lists, and **bold labels** for clarity.
+- Keep paragraphs short (2-4 lines max).
+- If information is uncertain, add a clear Markdown note: `> Note: This point should be verified from an official source.`
 """
 
 
@@ -87,11 +90,24 @@ def generate_with_retry_groq(
 ):
 
     call_model = model or settings.groq_model
+    can_use_browser_search = (
+        bool(use_browser_search)
+        and str(call_model) == str(settings.groq_fallback_model)
+    )
+    if use_browser_search and not can_use_browser_search:
+        _debug_log(
+            "BROWSER_SEARCH_SKIPPED",
+            {
+                "model": call_model,
+                "reason": "browser_search_allowed_only_on_fallback_model",
+            },
+        )
+
     _debug_log(
         "LLM_CALL_START",
         {
             "model": call_model,
-            "use_browser_search": use_browser_search,
+            "use_browser_search": can_use_browser_search,
             "message_count": len(messages),
             "max_retries": max_retries,
         },
@@ -105,11 +121,14 @@ def generate_with_retry_groq(
                 "model": model or settings.groq_model,
                 "temperature": 0.3,
                 "top_p": 1,
-                "reasoning_effort": settings.groq_reasoning_effort,
                 "stream": False,
             }
 
-            if use_browser_search:
+            # Some Groq models reject reasoning_effort; only attach it to known compatible models.
+            if "gpt-oss" in str(call_model):
+                request_payload["reasoning_effort"] = settings.groq_reasoning_effort
+
+            if can_use_browser_search:
                 request_payload["tools"] = [{"type": "browser_search"}]
 
             chat_completion = client.chat.completions.create(
@@ -121,7 +140,7 @@ def generate_with_retry_groq(
                 {
                     "model": call_model,
                     "attempt": attempt + 1,
-                    "used_browser_search": use_browser_search,
+                    "used_browser_search": can_use_browser_search,
                 },
             )
 
@@ -130,6 +149,34 @@ def generate_with_retry_groq(
         except Exception as e:
 
             err = str(e).lower()
+
+            # If a model does not support reasoning_effort, retry once without it.
+            if "reasoning_effort" in err and "not supported" in err:
+                try:
+                    retry_payload = {
+                        "messages": messages,
+                        "model": model or settings.groq_model,
+                        "temperature": 0.3,
+                        "top_p": 1,
+                        "stream": False,
+                    }
+                    if can_use_browser_search:
+                        retry_payload["tools"] = [{"type": "browser_search"}]
+
+                    chat_completion = client.chat.completions.create(**retry_payload)
+
+                    _debug_log(
+                        "LLM_CALL_SUCCESS_NO_REASONING_EFFORT",
+                        {
+                            "model": call_model,
+                            "attempt": attempt + 1,
+                            "used_browser_search": can_use_browser_search,
+                        },
+                    )
+
+                    return chat_completion.choices[0].message.content
+                except Exception:
+                    pass
 
             if (
                 "503" in err
@@ -193,17 +240,31 @@ def _format_context_with_metadata(top_results, fallback_docs):
     return "\n\n".join(fallback_docs)
 
 
-def _decide_retrieval_via_llm(query: str, history_text: str) -> dict:
-    """Ask the model whether retrieval is needed before answering."""
+def _safe_bool(value, default=False) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        v = value.strip().lower()
+        if v in ["true", "1", "yes"]:
+            return True
+        if v in ["false", "0", "no"]:
+            return False
+    return default
+
+
+def _decide_flow_via_llm(query: str, history_text: str) -> dict:
+    """LLM router decides whether to call retrieval and/or browser-search context step."""
     router_messages = [
         {
             "role": "system",
             "content": (
-                "You are a retrieval router for Indian legal Q&A. "
-                "Return ONLY valid JSON with keys: needs_retrieval (boolean), reason (string), query_for_search (string). "
-                "Rules: If the query is legal (laws, sections, acts, FIR, bail, court, rights, legal notices, petitions), "
-                "set needs_retrieval=true and reason='tool_call'. "
-                "If it is greeting/chit-chat/general and can be answered directly, set needs_retrieval=false and reason='direct_answer'."
+                "You are a routing controller for Indian legal chat. "
+                "Return ONLY valid JSON with keys: needs_tool_call (boolean), needs_browser_search (boolean), reason (string), query_for_search (string). "
+                "Rules: "
+                "1) For simple greeting/chit-chat/non-legal queries, set both booleans false and reason='direct_answer'. "
+                "2) For legal queries that need legal context, set needs_tool_call=true. "
+                "3) Set needs_browser_search=true only when latest/external verification is needed OR retrieval might be insufficient. "
+                "4) query_for_search must be a concise legal search query when tool is needed; otherwise keep original query."
             ),
         },
         {
@@ -211,15 +272,15 @@ def _decide_retrieval_via_llm(query: str, history_text: str) -> dict:
             "content": (
                 f"Conversation History:\n{history_text}\n\n"
                 f"User Query:\n{query}\n\n"
-                "Decide whether to call retrieval tool. "
-                "For legal queries, output reason exactly as 'tool_call'. "
-                "For direct answers, output reason exactly as 'direct_answer'."
+                "Decide full flow. "
+                "If query is simple like Hi/Hello/Thanks, output direct_answer with both flags false."
             ),
         },
     ]
 
     raw = generate_with_retry_groq(
         router_messages,
+        model=settings.groq_model,
         use_browser_search=False,
         max_retries=2,
     )
@@ -237,9 +298,18 @@ def _decide_retrieval_via_llm(query: str, history_text: str) -> dict:
     except Exception:
         decision = {}
 
+    reason = str(decision.get("reason", "")).strip() or "router_default"
+    needs_tool_call = _safe_bool(decision.get("needs_tool_call"), default=False)
+    needs_browser_search = _safe_bool(decision.get("needs_browser_search"), default=False)
+
+    # Keep browser search dependent on tool/retrieval stage for this architecture.
+    if needs_browser_search and not needs_tool_call:
+        needs_browser_search = False
+
     return {
-        "needs_retrieval": bool(decision.get("needs_retrieval", True)),
-        "reason": str(decision.get("reason", "")),
+        "needs_tool_call": needs_tool_call,
+        "needs_browser_search": needs_browser_search,
+        "reason": reason,
         "query_for_search": str(decision.get("query_for_search", query)).strip() or query,
     }
 
@@ -253,6 +323,7 @@ def legal_chat(query: str, history=None) -> dict:
     scores = []
     context_relevance = "not_used"
     context_text = ""
+    browser_context_text = ""
     retrieval_error = ""
 
     # ========== 2. Format History ==========
@@ -280,24 +351,27 @@ def legal_chat(query: str, history=None) -> dict:
         },
     )
 
-    # ========== 3. Decide Tool Use (LLM Router) ==========
+    # ========== 3. Decide Flow (LLM Router) ==========
     try:
-        decision = _decide_retrieval_via_llm(query, history_text)
+        decision = _decide_flow_via_llm(query, history_text)
     except Exception:
         decision = {
-            "needs_retrieval": True,
-            "reason": "router_failed_default_to_retrieval",
+            "needs_tool_call": False,
+            "needs_browser_search": False,
+            "reason": "router_failed_default_to_direct",
             "query_for_search": query,
         }
 
-    retrieval_requested = bool(decision.get("needs_retrieval", True))
+    retrieval_requested = bool(decision.get("needs_tool_call", False))
+    browser_search_requested = bool(decision.get("needs_browser_search", False))
     retrieval_reason = decision.get("reason", "")
     retrieval_used = False
 
     _debug_log(
-        "ROUTER_DECISION",
+        "FLOW_DECISION",
         {
             "retrieval_requested": retrieval_requested,
+            "browser_search_requested": browser_search_requested,
             "reason": retrieval_reason,
             "query_for_search": decision.get("query_for_search", query),
         },
@@ -345,7 +419,71 @@ def legal_chat(query: str, history=None) -> dict:
                 },
             )
 
-    # ========== 4. Build Prompt ==========
+    # ========== 4. Optional Browser Search via Fallback Model ==========
+    try:
+        need_browser_context = (
+            settings.chat_enable_browser_search
+            and retrieval_requested
+            and browser_search_requested
+            and ((not retrieval_used) or context_relevance == "low")
+        )
+
+        if need_browser_context:
+            browser_context_prompt = f"""
+You are a legal web researcher for India.
+Use browser search and return concise factual context only.
+Do not provide final legal advice.
+
+User Question:
+{query}
+
+Conversation History:
+{history_text}
+
+Retrieved Legal Context:
+{context_text}
+
+Output format:
+- Key facts (bullet points)
+- Relevant Acts/Sections (if found)
+- Verified sources with direct links
+"""
+
+            browser_messages = [
+                {
+                    "role": "system",
+                    "content": "You collect verified legal web context and sources for India.",
+                },
+                {
+                    "role": "user",
+                    "content": browser_context_prompt,
+                },
+            ]
+
+            _debug_log(
+                "BROWSER_CONTEXT_CALL",
+                {
+                    "model": settings.groq_fallback_model,
+                    "retrieval_used": retrieval_used,
+                    "context_relevance": context_relevance,
+                },
+            )
+
+            browser_context_text = generate_with_retry_groq(
+                browser_messages,
+                model=settings.groq_fallback_model,
+                use_browser_search=True,
+                max_retries=3,
+            ) or ""
+    except Exception as browser_err:
+        _debug_log(
+            "BROWSER_CONTEXT_ERROR",
+            {
+                "error": str(browser_err),
+            },
+        )
+
+    # ========== 5. Build Prompt for Main Model ==========
     user_prompt = f"""
 Conversation History (for reference only):
 {history_text}
@@ -353,12 +491,16 @@ Conversation History (for reference only):
 Legal Reference Context:
 {context_text}
 
+Browser Search Context:
+{browser_context_text}
+
 User Question:
 {query}
 
 Context Relevance Signal:
 - Relevance level: {context_relevance}
 - Retrieval requested by router: {retrieval_requested}
+- Browser search requested by router: {browser_search_requested}
 - Retrieval used: {retrieval_used}
 - Router reason: {retrieval_reason}
 
@@ -366,16 +508,14 @@ Instructions:
 - First, check whether the provided context is relevant to the user’s question.
 - If the context directly matches the query topic, use it as the main source.
 - If the context is partially related, use it carefully and supplement with general Indian law knowledge.
-- If the context is not related, switch to Inbuilt Search Fallback Mode:
-    1) Ignore unrelated retrieved context.
-    2) Use your built-in legal knowledge and reasoning about Indian law.
-    3) Provide the best possible helpful answer.
-    4) Clearly mark uncertain points and suggest verification from official sources.
+- If retrieved context is weak but Browser Search Context is useful, use Browser Search Context and cite those sources.
+- If both contexts are weak, use your built-in legal knowledge carefully and clearly mark uncertainty.
 
 - Use ONLY verified Indian law knowledge.
 - Provide step-by-step guidance when applicable.
 - Cite relevant Acts/Sections if available.
 - If information is insufficient, say so honestly.
+- Keep the final answer precise, direct, and focused on the user question.
 
 """
 
@@ -393,21 +533,22 @@ Instructions:
 
     ]
 
-    # ========== 5. Generate Response ==========
+    # ========== 6. Generate Final Response from Main Model ==========
 
     try:
-        use_browser_search = settings.chat_enable_browser_search and (not retrieval_used)
         _debug_log(
             "FINAL_LLM_CALL",
             {
+                "selected_model": settings.groq_model,
                 "retrieval_used": retrieval_used,
                 "context_count": len(context_list),
-                "use_browser_search": use_browser_search,
+                "browser_context_used": bool(browser_context_text.strip()),
             },
         )
         response_text = generate_with_retry_groq(
             messages,
-            use_browser_search=use_browser_search,
+            model=settings.groq_model,
+            use_browser_search=False,
         )
 
     except Exception as e:
@@ -418,6 +559,7 @@ Instructions:
             "error": str(e),
             "context_count": len(context_list),
             "retrieval_requested": retrieval_requested,
+            "browser_search_requested": browser_search_requested,
             "retrieval_used": retrieval_used,
             "retrieval_error": retrieval_error,
         }
@@ -429,6 +571,7 @@ Instructions:
         "answer": response_text.strip(),
         "context_count": len(context_list),
         "retrieval_requested": retrieval_requested,
+        "browser_search_requested": browser_search_requested,
         "retrieval_used": retrieval_used,
         "retrieval_error": retrieval_error,
     }
