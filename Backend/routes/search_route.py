@@ -10,7 +10,7 @@ router = APIRouter()
 def search_query(
     q: str = Query(..., description="Search query"),
     top_k: int = Query(5, ge=1, le=20, description="Max results"),
-    mode: str = Query("auto", description="Search mode: auto | vector | search"),
+    mode: str = Query("auto", description="Search mode: auto | search | vector (legacy)"),
 ):
     try:
         result = search_atlas_direct(query=q, top_k=top_k, mode=mode)
