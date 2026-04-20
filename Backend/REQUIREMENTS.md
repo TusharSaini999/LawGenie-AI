@@ -22,7 +22,8 @@ pip install -r requirements.txt
 
 - **Lightweight** - Only dependencies needed by chat service
 - Does NOT include: PyPDF2, langchain-core, langchain-text-splitters
-- Includes: FastAPI, MongoDB, LLM client, embedding model for query encoding
+- Includes: FastAPI, MongoDB, JWT, Groq LLM client
+- Chat retrieval uses MongoDB Atlas Search only, so no local embedding model is required
 - **Production deployments should use this** since training is optional
 
 ```bash
@@ -66,15 +67,13 @@ Pydantic
 MongoDB (PyMongo)
 JWT (PyJWT)
 Groq API client
-numpy, scikit-learn
-sentence-transformers (for query encoding)  ← SHARED with training
-torch, transformers
 ```
 
 **NOT included:**
 - ❌ PyPDF2 (PDF reading)
 - ❌ langchain-core (text splitting)
 - ❌ langchain-text-splitters
+- ❌ numpy, sentence-transformers, torch, transformers
 
 ### Training Service Only (requirements-training.txt)
 ```
@@ -87,14 +86,14 @@ Groq API client
 PyPDF2 (PDF reading)
 langchain-core (text document handling)
 langchain-text-splitters (chunk splitting)
-numpy, scikit-learn
+numpy
 sentence-transformers (for document embeddings)
 torch, transformers
 ```
 
 ### Shared Dependencies
-These libraries are used by **BOTH** chat and training:
-- `sentence-transformers` - Chat uses for query embedding, Training uses for document embedding
+These libraries are used by **training only**:
+- `sentence-transformers` - Document embedding generation
 - `torch`, `transformers` - Required by sentence-transformers
 
 ---
@@ -152,5 +151,5 @@ Look for comments in the code marking training-only modules:
 - `core/train_data.py` - TRAINING ONLY (marked with comments)
 - `routes/train_route.py` - TRAINING ONLY (marked with comments)
 - `training_service.py` - TRAINING SERVICE ENDPOINT (marked with comments)
-- `core/query_engine.py` - CHAT SERVICE (but uses sentence-transformers which is also in training)
+- `core/query_engine.py` - CHAT SERVICE (Atlas Search only)
 - `main.py` - CHAT SERVICE ONLY (training route removed)

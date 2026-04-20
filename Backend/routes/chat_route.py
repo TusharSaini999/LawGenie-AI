@@ -8,6 +8,26 @@ router = APIRouter()
 bearer_scheme = HTTPBearer(auto_error=False)
 
 
+def _resolve_or_create_token(
+    credentials: HTTPAuthorizationCredentials | None,
+) -> tuple[str, str]:
+    token = credentials.credentials if credentials else None
+    token_status = "new"
+
+    if not token:
+        token = create_jwt_token()
+    else:
+        payload = verify_jwt_token(token)
+        if payload is None:
+            token = create_jwt_token()
+            token_status = "regenerated"
+        else:
+            token_status = "existing"
+
+    mongo_session_manager.create_session(token)
+    return token, token_status
+
+
 @router.get("/history")
 def get_chat_history(
     credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme),
@@ -51,39 +71,20 @@ def chat_query(
 ):
 
     try:
-        token = None
-        token_status = "new"
+        token, token_status = _resolve_or_create_token(credentials)
 
-        if credentials:
-            token = credentials.credentials
-
-        if token:
-            payload = verify_jwt_token(token)
-            if payload is None:
-                token = create_jwt_token()
-                mongo_session_manager.create_session(token)
-                token_status = "regenerated"
-            else:
-                mongo_session_manager.create_session(token)
-                token_status = "existing"
-        else:
-            token = create_jwt_token()
-            mongo_session_manager.create_session(token)
-            token_status = "new"
-
-        #get the history
-        history=mongo_session_manager.get_history(token)
-        response_text = legal_chat( query=q,history=history)
+        history = mongo_session_manager.get_history(token)
+        response_text = legal_chat(query=q, history=history)
         mongo_session_manager.store_message(token, "User Query", q)
         mongo_session_manager.store_message(token, "AI Response", response_text.get("answer", ""))
-        
-        history=mongo_session_manager.get_history(token)
+
+        history = mongo_session_manager.get_history(token)
         return {
             "query": q,
             "response": response_text,
             "token": token,
             "token_status": token_status,
-            "history":history
+            "history": history,
         }
 
     except HTTPException as http_exc:

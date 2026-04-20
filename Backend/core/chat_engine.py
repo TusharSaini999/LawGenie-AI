@@ -1,7 +1,7 @@
-import os
 import time
 import random
 import json
+import re
 
 from groq import Groq
 
@@ -12,7 +12,7 @@ from config.settings import settings
 # ================== GROQ CLIENT ==================
 
 client = Groq(
-    api_key=os.environ.get("GROQ_API_KEY") or settings.groq_api_key
+    api_key=settings.groq_api_key
 )
 
 
@@ -118,10 +118,11 @@ def generate_with_retry_groq(
         try:
             request_payload = {
                 "messages": messages,
-                "model": model or settings.groq_model,
+                "model": call_model,
                 "temperature": 0.3,
                 "top_p": 1,
                 "stream": False,
+                "max_completion_tokens": settings.groq_max_completion_tokens,
             }
 
             # Some Groq models reject reasoning_effort; only attach it to known compatible models.
@@ -155,10 +156,11 @@ def generate_with_retry_groq(
                 try:
                     retry_payload = {
                         "messages": messages,
-                        "model": model or settings.groq_model,
+                        "model": call_model,
                         "temperature": 0.3,
                         "top_p": 1,
                         "stream": False,
+                        "max_completion_tokens": settings.groq_max_completion_tokens,
                     }
                     if can_use_browser_search:
                         retry_payload["tools"] = [{"type": "browser_search"}]
@@ -240,77 +242,103 @@ def _format_context_with_metadata(top_results, fallback_docs):
     return "\n\n".join(fallback_docs)
 
 
-def _safe_bool(value, default=False) -> bool:
-    if isinstance(value, bool):
-        return value
-    if isinstance(value, str):
-        v = value.strip().lower()
-        if v in ["true", "1", "yes"]:
-            return True
-        if v in ["false", "0", "no"]:
-            return False
-    return default
+def _looks_like_small_talk(query: str) -> bool:
+    cleaned = " ".join((query or "").strip().lower().split())
+    if not cleaned:
+        return True
+
+    small_talk_words = {
+        "hi",
+        "hello",
+        "hey",
+        "thanks",
+        "thank you",
+        "ok",
+        "okay",
+        "bye",
+        "good morning",
+        "good evening",
+        "who are you",
+    }
+
+    if cleaned in small_talk_words:
+        return True
+
+    if len(cleaned.split()) <= 3 and cleaned.rstrip("!?.") in small_talk_words:
+        return True
+
+    # If it has no legal intent markers, treat very short conversational input as chitchat.
+    legal_markers = (
+        "law",
+        "legal",
+        "ipc",
+        "crpc",
+        "section",
+        "act",
+        "court",
+        "judge",
+        "police",
+        "fir",
+        "bail",
+        "contract",
+        "rights",
+        "notice",
+        "case",
+        "complaint",
+        "divorce",
+        "property",
+        "consumer",
+        "labour",
+        "labor",
+        "cyber",
+        "it act",
+        "rti",
+    )
+    if len(cleaned.split()) <= 5 and not any(marker in cleaned for marker in legal_markers):
+        return True
+
+    return False
 
 
-def _decide_flow_via_llm(query: str, history_text: str) -> dict:
-    """LLM router decides whether to call retrieval and/or browser-search context step."""
-    router_messages = [
-        {
-            "role": "system",
-            "content": (
-                "You are a routing controller for Indian legal chat. "
-                "Return ONLY valid JSON with keys: needs_tool_call (boolean), needs_browser_search (boolean), reason (string), query_for_search (string). "
-                "Rules: "
-                "1) For simple greeting/chit-chat/non-legal queries, set both booleans false and reason='direct_answer'. "
-                "2) For legal queries that need legal context, set needs_tool_call=true. "
-                "3) Set needs_browser_search=true only when latest/external verification is needed OR retrieval might be insufficient. "
-                "4) query_for_search must be a concise legal search query when tool is needed; otherwise keep original query."
-            ),
-        },
-        {
-            "role": "user",
-            "content": (
-                f"Conversation History:\n{history_text}\n\n"
-                f"User Query:\n{query}\n\n"
-                "Decide full flow. "
-                "If query is simple like Hi/Hello/Thanks, output direct_answer with both flags false."
-            ),
-        },
+def _needs_browser_search(query: str) -> bool:
+    cleaned = " ".join((query or "").strip().lower().split())
+    if not cleaned:
+        return False
+
+    # Browser search helps when user asks for latest updates / notifications / recent changes.
+    recency_patterns = [
+        r"\blatest\b",
+        r"\brecent\b",
+        r"\bcurrent\b",
+        r"\btoday\b",
+        r"\bupdated\b",
+        r"\bnew\s+rule\b",
+        r"\bnew\s+amendment\b",
+        r"\bamendment\b",
+        r"\bnotification\b",
+        r"\bcircular\b",
+        r"\bgazette\b",
+        r"\b202[5-9]\b",
     ]
+    return any(re.search(pattern, cleaned) for pattern in recency_patterns)
 
-    raw = generate_with_retry_groq(
-        router_messages,
-        model=settings.groq_model,
-        use_browser_search=False,
-        max_retries=2,
-    )
 
-    _debug_log(
-        "ROUTER_RAW_OUTPUT",
-        {
-            "query": query,
-            "raw": raw,
-        },
-    )
+def _decide_flow(query: str, history_text: str) -> dict:
+    del history_text  # Reserved for future heuristics.
 
-    try:
-        decision = json.loads((raw or "").strip())
-    except Exception:
-        decision = {}
-
-    reason = str(decision.get("reason", "")).strip() or "router_default"
-    needs_tool_call = _safe_bool(decision.get("needs_tool_call"), default=False)
-    needs_browser_search = _safe_bool(decision.get("needs_browser_search"), default=False)
-
-    # Keep browser search dependent on tool/retrieval stage for this architecture.
-    if needs_browser_search and not needs_tool_call:
-        needs_browser_search = False
+    if _looks_like_small_talk(query):
+        return {
+            "needs_tool_call": False,
+            "needs_browser_search": False,
+            "reason": "direct_answer_small_talk",
+            "query_for_search": query,
+        }
 
     return {
-        "needs_tool_call": needs_tool_call,
-        "needs_browser_search": needs_browser_search,
-        "reason": reason,
-        "query_for_search": str(decision.get("query_for_search", query)).strip() or query,
+        "needs_tool_call": True,
+        "needs_browser_search": _needs_browser_search(query),
+        "reason": "retrieval_by_default_for_legal_query",
+        "query_for_search": query,
     }
 
 
@@ -351,16 +379,8 @@ def legal_chat(query: str, history=None) -> dict:
         },
     )
 
-    # ========== 3. Decide Flow (LLM Router) ==========
-    try:
-        decision = _decide_flow_via_llm(query, history_text)
-    except Exception:
-        decision = {
-            "needs_tool_call": False,
-            "needs_browser_search": False,
-            "reason": "router_failed_default_to_direct",
-            "query_for_search": query,
-        }
+    # ========== 3. Decide Flow (Deterministic Router) ==========
+    decision = _decide_flow(query, history_text)
 
     retrieval_requested = bool(decision.get("needs_tool_call", False))
     browser_search_requested = bool(decision.get("needs_browser_search", False))
