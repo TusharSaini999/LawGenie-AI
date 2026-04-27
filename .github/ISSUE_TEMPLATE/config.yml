@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/LawGenie-AI/LawGenie-AI/discussions
+    about: Join our community discussions
+  - name: Documentation
+    url: https://github.com/LawGenie-AI/LawGenie-AI#readme
+    about: Check our documentation for help
