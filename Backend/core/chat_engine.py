@@ -3,17 +3,23 @@ import random
 import json
 import re
 
-from groq import Groq
+import threading
+from itertools import cycle
+import google.generativeai as genai
 
 from core.query_engine import search_atlas_direct
 from config.settings import settings
 
+# ================== GEMINI CLIENT ==================
+GEMINI_API_KEYS = [k.strip() for k in settings.gemini_api_keys.split(",") if k.strip()]
+if not GEMINI_API_KEYS:
+    raise ValueError("GEMINI_API_KEYS is empty")
+key_cycle = cycle(GEMINI_API_KEYS)
+cycle_lock = threading.Lock()
 
-# ================== GROQ CLIENT ==================
-
-client = Groq(
-    api_key=settings.groq_api_key
-)
+def get_next_gemini_key():
+    with cycle_lock:
+        return next(key_cycle)
 
 
 def _debug_log(label: str, payload: dict) -> None:
@@ -82,17 +88,17 @@ Output Format:
 """
 
 
-def generate_with_retry_groq(
+def generate_with_retry_gemini(
     messages,
     model=None,
     use_browser_search=False,
     max_retries=5
 ):
 
-    call_model = model or settings.groq_model
+    call_model = model or settings.gemini_model
     can_use_browser_search = (
         bool(use_browser_search)
-        and str(call_model) == str(settings.groq_fallback_model)
+        and str(call_model) == str(settings.gemini_fallback_model)
     )
     if use_browser_search and not can_use_browser_search:
         _debug_log(
@@ -113,80 +119,67 @@ def generate_with_retry_groq(
         },
     )
 
+    system_instruction = None
+    gemini_messages = []
+    
+    for m in messages:
+        if m["role"] == "system":
+            if not system_instruction:
+                system_instruction = m["content"]
+            else:
+                system_instruction += "\n" + m["content"]
+        else:
+            role = "user" if m["role"] in ["user", "user query"] else "model"
+            gemini_messages.append({"role": role, "parts": [m["content"]]})
+
     for attempt in range(max_retries):
-
         try:
-            request_payload = {
-                "messages": messages,
-                "model": call_model,
-                "temperature": 0.3,
-                "top_p": 1,
-                "stream": False,
-                "max_completion_tokens": settings.groq_max_completion_tokens,
-            }
-
-            # Some Groq models reject reasoning_effort; only attach it to known compatible models.
-            if "gpt-oss" in str(call_model):
-                request_payload["reasoning_effort"] = settings.groq_reasoning_effort
-
-            if can_use_browser_search:
-                request_payload["tools"] = [{"type": "browser_search"}]
-
-            chat_completion = client.chat.completions.create(
-                **request_payload
+            api_key = get_next_gemini_key()
+            genai.configure(api_key=api_key)
+            
+            tools = "google_search_retrieval" if can_use_browser_search else None
+            
+            gen_model = genai.GenerativeModel(
+                model_name=call_model,
+                system_instruction=system_instruction,
+                tools=tools,
             )
-
+            
+            generation_config = genai.GenerationConfig(
+                temperature=0.3,
+                top_p=1.0,
+            )
+            
+            if not gemini_messages:
+                raise ValueError("No messages to send.")
+            
+            response = gen_model.generate_content(
+                gemini_messages,
+                generation_config=generation_config
+            )
+            
             _debug_log(
                 "LLM_CALL_SUCCESS",
                 {
                     "model": call_model,
                     "attempt": attempt + 1,
                     "used_browser_search": can_use_browser_search,
+                    "key_prefix": api_key[:4] + "..."
                 },
             )
 
-            return chat_completion.choices[0].message.content
+            return response.text
 
         except Exception as e:
-
             err = str(e).lower()
-
-            # If a model does not support reasoning_effort, retry once without it.
-            if "reasoning_effort" in err and "not supported" in err:
-                try:
-                    retry_payload = {
-                        "messages": messages,
-                        "model": call_model,
-                        "temperature": 0.3,
-                        "top_p": 1,
-                        "stream": False,
-                        "max_completion_tokens": settings.groq_max_completion_tokens,
-                    }
-                    if can_use_browser_search:
-                        retry_payload["tools"] = [{"type": "browser_search"}]
-
-                    chat_completion = client.chat.completions.create(**retry_payload)
-
-                    _debug_log(
-                        "LLM_CALL_SUCCESS_NO_REASONING_EFFORT",
-                        {
-                            "model": call_model,
-                            "attempt": attempt + 1,
-                            "used_browser_search": can_use_browser_search,
-                        },
-                    )
-
-                    return chat_completion.choices[0].message.content
-                except Exception:
-                    pass
-
             if (
-                "503" in err
-                or "unavailable" in err
+                "429" in err
+                or "quota" in err
                 or "overloaded" in err
+                or "503" in err
                 or "timeout" in err
+                or "unavailable" in err
             ):
-
                 _debug_log(
                     "LLM_CALL_RETRY",
                     {
@@ -202,7 +195,7 @@ def generate_with_retry_groq(
 
             raise e
 
-    raise Exception("Groq API overloaded. Try again later.")
+    raise Exception("Gemini API overloaded or quota exceeded. Try again later.")
 
 
 def _format_context_with_metadata(top_results, fallback_docs):
@@ -483,15 +476,15 @@ Output format:
             _debug_log(
                 "BROWSER_CONTEXT_CALL",
                 {
-                    "model": settings.groq_fallback_model,
+                    "model": settings.gemini_fallback_model,
                     "retrieval_used": retrieval_used,
                     "context_relevance": context_relevance,
                 },
             )
 
-            browser_context_text = generate_with_retry_groq(
+            browser_context_text = generate_with_retry_gemini(
                 browser_messages,
-                model=settings.groq_fallback_model,
+                model=settings.gemini_fallback_model,
                 use_browser_search=True,
                 max_retries=3,
             ) or ""
@@ -559,15 +552,15 @@ Instructions:
         _debug_log(
             "FINAL_LLM_CALL",
             {
-                "selected_model": settings.groq_model,
+                "selected_model": settings.gemini_model,
                 "retrieval_used": retrieval_used,
                 "context_count": len(context_list),
                 "browser_context_used": bool(browser_context_text.strip()),
             },
         )
-        response_text = generate_with_retry_groq(
+        response_text = generate_with_retry_gemini(
             messages,
-            model=settings.groq_model,
+            model=settings.gemini_model,
             use_browser_search=False,
         )
 

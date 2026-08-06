@@ -9,12 +9,10 @@ load_dotenv()
 
 class Settings(BaseSettings):
 
-    # ================= Groq API =================
-    groq_api_key: str = Field(..., env="GROQ_API_KEY")
-    groq_model: str = Field("meta-llama/llama-4-scout-17b-16e-instruct", env="GROQ_MODEL")
-    groq_fallback_model: str = Field("openai/gpt-oss-120b", env="GROQ_FALLBACK_MODEL")
-    groq_max_completion_tokens: int = Field(1200, env="GROQ_MAX_COMPLETION_TOKENS")
-    groq_reasoning_effort: str = Field("low", env="GROQ_REASONING_EFFORT")
+    # ================= Gemini API =================
+    gemini_api_keys: str = Field(..., env="GEMINI_API_KEYS")
+    gemini_model: str = Field("gemini-2.5-pro", env="GEMINI_MODEL")
+    gemini_fallback_model: str = Field("gemini-2.5-flash", env="GEMINI_FALLBACK_MODEL")
     
     # ================= JWT ====================
     jwt_secret_key: str = Field(..., env="JWT_SECRET_KEY")

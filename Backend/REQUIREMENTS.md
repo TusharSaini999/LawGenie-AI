@@ -22,7 +22,7 @@ pip install -r requirements.txt
 
 - **Lightweight** - Only dependencies needed by chat service
 - Does NOT include: PyPDF2, langchain-core, langchain-text-splitters
-- Includes: FastAPI, MongoDB, JWT, Groq LLM client
+- Includes: FastAPI, MongoDB, JWT, Gemini LLM client
 - Chat retrieval uses MongoDB Atlas Search only, so no local embedding model is required
 - **Production deployments should use this** since training is optional
 
@@ -66,7 +66,7 @@ Uvicorn
 Pydantic
 MongoDB (PyMongo)
 JWT (PyJWT)
-Groq API client
+Gemini API client
 ```
 
 **NOT included:**
@@ -82,7 +82,7 @@ Uvicorn
 Pydantic
 MongoDB (PyMongo)
 JWT (PyJWT)
-Groq API client
+Gemini API client
 PyPDF2 (PDF reading)
 langchain-core (text document handling)
 langchain-text-splitters (chunk splitting)

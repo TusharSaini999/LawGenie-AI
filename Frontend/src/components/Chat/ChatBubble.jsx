@@ -106,7 +106,7 @@ function ChatBubble({ role, text, createdAt }) {
   const retryRef = useRef(false);
   const stopRequestedRef = useRef(false);
   const bubbleWidthClass = isUser
-    ? "max-w-[92%] sm:max-w-[80%]"
+    ? "max-w-[85%] sm:max-w-[70%]"
     : "max-w-full";
 
   const stopSpeech = () => {
@@ -283,22 +283,18 @@ function ChatBubble({ role, text, createdAt }) {
       className={`w-full flex ${isUser ? "justify-end" : "justify-start"}`}
     >
       <div
-        className={`${bubbleWidthClass} ${isUser ? "items-end" : "items-start"} flex flex-col gap-2`}
+        className={`${bubbleWidthClass} flex flex-col gap-1`}
       >
-        <div className="flex items-center gap-2 px-1">
-          <span className="text-[11px] font-semibold uppercase tracking-wide text-t-muted">
+        <div className={`flex items-center gap-2 ${isUser ? "justify-end" : "justify-start"} px-2`}>
+          <span className="text-[14px] font-semibold text-t-primary">
             {isUser ? "You" : "LawGenie"}
-          </span>
-
-          <span className="text-[11px] text-t-disabled">
-            {formatTime(createdAt)}
           </span>
 
           <button
             type="button"
             onClick={handleSpeak}
             disabled={!speechText}
-            className="ml-1 rounded-md border border-border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-t-muted transition hover:text-t-primary disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-md px-2 py-0.5 text-[11px] font-medium text-t-muted hover:text-t-primary transition disabled:opacity-50"
             aria-label={isSpeaking ? "Stop reading message" : "Read message aloud"}
             title={isSpeaking ? "Stop" : "Read aloud"}
           >
@@ -313,10 +309,10 @@ function ChatBubble({ role, text, createdAt }) {
         </div>
 
         <div
-          className={`rounded-2xl px-4 py-3 text-[15px] leading-relaxed whitespace-pre-wrap wrap-anywhere border ${
+          className={`px-4 py-3 text-[15px] leading-relaxed whitespace-pre-wrap wrap-anywhere ${
             isUser
-              ? "bg-surface-elevated text-t-primary border-border"
-              : "bg-transparent text-bot-text border-transparent"
+              ? "bg-surface-elevated text-t-primary rounded-3xl"
+              : "bg-transparent text-t-primary"
           }`}
         >
           {isUser ? (

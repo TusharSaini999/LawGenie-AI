@@ -14,7 +14,7 @@ pymongo==4.10.1
 PyJWT==2.9.0
 
 # ================== LLM Client ==================
-groq>=0.12.0
+google-generativeai
 requests==2.31.0
 
 # ================== PDF Processing (TRAINING ONLY) ==================

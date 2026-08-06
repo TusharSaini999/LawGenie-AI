@@ -16,7 +16,7 @@ LawGenie AI Backend is now split into **two independent services** that share a 
 - FastAPI
 - Uvicorn
 - MongoDB (PyMongo)
-- Groq API client
+- Gemini API client
 - Sentence Transformers / Torch
 
 ## Folder Layout
@@ -42,7 +42,7 @@ Backend/
 
 - Python 3.10+
 - MongoDB (local instance or Atlas)
-- Groq API key
+- Gemini API key
 
 ## Setup
 
@@ -86,11 +86,9 @@ See [REQUIREMENTS.md](REQUIREMENTS.md) for detailed requirements information.
 3. Create `Backend/.env`.
 
 ```env
-GROQ_API_KEY=your_groq_api_key
-GROQ_MODEL=meta-llama/llama-4-scout-17b-16e-instruct
-GROQ_FALLBACK_MODEL=openai/gpt-oss-120b
-GROQ_MAX_COMPLETION_TOKENS=1200
-GROQ_REASONING_EFFORT=low
+GEMINI_API_KEYS=key1,key2,key3
+GEMINI_MODEL=gemini-2.5-pro
+GEMINI_FALLBACK_MODEL=gemini-2.5-flash
 
 JWT_SECRET_KEY=your_jwt_secret
 JWT_ALGO=HS256

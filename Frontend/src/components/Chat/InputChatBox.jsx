@@ -76,10 +76,10 @@ function InputChatBox({
   };
 
   return (
-    <div className="w-full border-t border-border bg-bg px-4 py-4 sm:px-6">
-      <form onSubmit={handleFormSubmit} className="w-full max-w-5xl mx-auto space-y-2">
-        <div className="rounded-3xl border border-border bg-surface p-2 shadow-sm focus-within:border-primary/40">
-          <div className="rounded-2xl bg-surface">
+    <div className="relative w-full px-4 py-4 sm:px-6 pb-6 bg-bg/80 backdrop-blur-sm">
+      <form onSubmit={handleFormSubmit} className="relative z-10 w-full max-w-3xl mx-auto space-y-2">
+        <div className="rounded-[24px] border border-border bg-surface/60 backdrop-blur-md p-2 shadow-sm focus-within:ring-1 focus-within:ring-primary/50 transition-colors">
+          <div className="rounded-2xl bg-transparent">
             <textarea
               maxLength={MAX_MESSAGE_LENGTH}
               rows={1}
@@ -121,9 +121,9 @@ function InputChatBox({
               <button
                 type="submit"
                 disabled={!canSend}
-                className={`flex items-center justify-center w-10 h-10 rounded-2xl transition ${
-                  canSend ? "hover:scale-105" : "opacity-40"
-                } bg-primary text-white`}
+                className={`flex items-center justify-center w-8 h-8 rounded-full transition ${
+                  canSend ? "hover:scale-105 bg-primary text-white" : "bg-border text-t-muted"
+                }`}
                 aria-label="Send message"
               >
                 {loading ? (
@@ -136,8 +136,8 @@ function InputChatBox({
           </div>
         </div>
 
-        <p className="text-center text-[11px] text-t-disabled px-2">
-          LawGenie can make mistakes. Verify legal advice with official sources.
+        <p className="text-center text-xs text-t-disabled px-2 mt-2">
+          LawGenie can make mistakes. Consider verifying important information.
         </p>
 
         {errorMessage && <div className="text-xs mt-2 text-error">{errorMessage}</div>}

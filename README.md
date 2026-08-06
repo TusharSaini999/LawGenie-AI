@@ -34,7 +34,7 @@ LawGenie-AI/
 - Python
 - FastAPI + Uvicorn
 - MongoDB (PyMongo)
-- Groq API client
+- Gemini API client
 - Sentence Transformers / Torch
 
 ### Frontend
@@ -83,11 +83,11 @@ pip install -r requirements.txt
 Create `Backend/.env` and set required values:
 
 ```env
-GROQ_API_KEY=your_groq_key
+GEMINI_API_KEYS=key1,key2,key3
 JWT_SECRET_KEY=your_jwt_secret
 MONGODB_URI=mongodb://localhost:27017
 MONGODB_DB_NAME=lawgenie
-GROQ_MODEL=openai/gpt-oss-120b
+GEMINI_MODEL=gemini-2.5-pro
 ```
 
 **Run Chat Service (Main Deployment):**

@@ -14,13 +14,13 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <App />,
-      },
-      {
-        path: "chat",
-        element: <ChatPage />,
       }
     ],
   },
+  {
+    path: "/chat",
+    element: <ChatPage />,
+  }
 ]);
 
 createRoot(document.getElementById("root")).render(
