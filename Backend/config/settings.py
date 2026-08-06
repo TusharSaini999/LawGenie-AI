@@ -46,6 +46,9 @@ class Settings(BaseSettings):
 
     chat_expiry_time: int = Field(86400, env="CHAT_EXPIRY_TIME")
 
+    # ================= CORS ==================
+    allowed_origins: str = Field("http://localhost:5173", env="ALLOWED_ORIGINS")
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"

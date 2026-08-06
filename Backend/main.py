@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from core.mongo_store import bootstrap_mongo
 from routes.chat_route import router as chat_router
 from routes.search_route import router as search_router
+from config.settings import settings
 
 # ====================================================
 # CHAT AND SEARCH DEPLOYMENT SERVICE
@@ -32,10 +33,7 @@ app.add_middleware(
     CORSMiddleware,
     # List of origins that are allowed to make requests
     # Include active frontend dev ports and common local hosts.
-    allow_origins=[
-        "https://law-genie-ai.vercel.app",
-        "http://localhost:5178"
-    ],
+    allow_origins=[origin.strip() for origin in settings.allowed_origins.split(",")] if settings.allowed_origins else ["*"],
     allow_credentials=True,     # Allow cookies/auth headers
     # Allow all methods (GET, POST, PUT, DELETE, etc.)
     allow_methods=["*"],
